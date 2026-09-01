@@ -165,6 +165,79 @@ footer {
     font-size: 0.8rem;
 }
 
+.footer-links {
+    display: flex;
+    gap: 16px;
+}
+
+.footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: var(--text);
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.about-image {
+    width: 180px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.about-text {
+    max-width: 600px;
+}
+
+.about-main {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.about-sub {
+    margin: 8px 0 0;
+    color: var(--muted);
+}
+
+.profile-banner {
+    width: min(1100px, calc(100% - 48px));
+    height: 240px;
+    margin: 0 auto 72px;
+
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 0 0 12px 12px;
+}
+
+.profile-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    object-position: center 30%;
+}
+
+
+@media (max-width: 700px) {
+    .about-content {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .about-image {
+        width: 140px;
+    }
+}
+
+
 @media (max-width: 700px) {
     header,
     main,

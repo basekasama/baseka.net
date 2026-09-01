@@ -460,6 +460,20 @@ pre {
     color: var(--muted);
     font-size: 0.9rem;
 }
+.footer-links {
+    display: flex;
+    gap: 16px;
+}
+
+.footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: var(--text);
+}
+
 
 @media (max-width: 980px) {
     .hero-grid,
