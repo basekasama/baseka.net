@@ -147,10 +147,18 @@ h2 {
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
 }
+
 .experiment-links {
     margin-top: auto;
     display: flex;
     gap: 18px;
+}
+
+.experiment-links {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .experiment-links a {
