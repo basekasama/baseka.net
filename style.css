@@ -147,6 +147,22 @@ h2 {
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
 }
+.experiment-links {
+    margin-top: auto;
+    display: flex;
+    gap: 18px;
+}
+
+.experiment-links a {
+    color: var(--accent);
+    font-family: monospace;
+    text-decoration: none;
+}
+
+.experiment-links a:hover {
+    color: var(--text);
+}
+
 
 @media (max-width: 700px) {
     .experiments {
