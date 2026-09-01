@@ -151,17 +151,13 @@ h2 {
 .experiment-links {
     margin-top: auto;
     display: flex;
-    gap: 18px;
-}
-
-.experiment-links {
-    margin-top: auto;
-    display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 6px;
 }
 
-.experiment-links a {
+.experiment-links a,
+.experiment-links a:visited {
     color: var(--accent);
     font-family: monospace;
     text-decoration: none;
