@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Analytics tag goes here -->
+
+    <title>「10」はなぜ作れるのか | baseka.net</title>
+    <meta
+        name="description"
+        content="四つの数字と四則演算を総当たりして、10パズルの作りやすさと作れない組の性質を調べた実験。"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="site-logo" href="/">baseka.net</a>
+
+            <nav class="site-nav" aria-label="Primary">
+               
+                <a href="/">Home</a>
+                <a href="/#works">Works</a>
+                <a href="/#experiments">Experiments</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <header class="article-hero">
+                <div class="wrap article-width">
+<div class="eyebrow-row">
+    <p class="eyebrow">experiment / 10 puzzle</p>
+
+    <a class="language-link"
+       href="/experiments/10-puzzle/">
+        English
+    </a>
+</div>
+
+                    <h1>「10」はなぜ作れるのか</h1>
+
+                    <p class="subtitle">
+                        ――四つの数字と四則演算を総当たりしてみた
+                    </p>
+
+                    <p class="intro">
+                        「1, 1, 7, 7から、四則演算だけで10を作れるだろうか？」
+                    </p>
+
+                    <p>
+                        そんな小さな疑問から、この実験は始まった。
+                    </p>
+
+                    <p>
+                        使えるのは四つの数字それぞれ一回ずつと、
+                        加減乗除、そして括弧だけ。
+                        いわゆる「10パズル」である。
+                    </p>
+
+                    <p>
+                        1177について実際に全探索してみると、10は作れなかった。
+                    </p>
+
+                    <p>
+                        では、これは珍しいことなのだろうか。
+                    </p>
+
+                    <p>
+                        そもそも10という数字は、四つの数字から作りやすいのだろうか。
+                        それとも、私たちが10進法に慣れているために、
+                        なんとなく「作りやすそう」と感じているだけなのだろうか。
+                    </p>
+
+                    <p>
+                        そこで、1から9までの四つの数字について、
+                        可能な式をすべてコンピュータに調べさせることにした。
+                    </p>
+                </div>
+            </header>
+
+            <div class="wrap article-width article-body">
+                <section>
+                    <h2><span>1.</span> 10は、たしかに作りやすかった</h2>
+
+                    <p>
+                        四つの数字を <code>(a, b, c, d)</code> とする。
+                    </p>
+
+                    <p>使える演算は、</p>
+
+                    <div class="equation">
+                        +　−　×　÷
+                    </div>
+
+                    <p>
+                        の四種類。数字の順序は自由に並べ替え、
+                        括弧も自由につける。
+                    </p>
+
+                    <p>
+                        四項の二項演算には、括弧の構造が5種類存在する。
+                        演算子の選択は <code>4³ = 64</code> 通りであり、
+                        四つの数字がすべて異なれば順列は24通り。
+                    </p>
+
+                    <p>したがって、生の探索候補は最大で</p>
+
+                    <div class="equation">
+                        24 × 64 × 5 = <strong>7680</strong>
+                    </div>
+
+                    <p>
+                        通りになる。
+                    </p>
+
+                    <p>
+                        途中計算は浮動小数点ではなく既約分数として保持し、
+                        誤差によって「ほぼ10」が10と判定されないようにした。
+                    </p>
+
+                    <p>
+                        まず <code>(a,b,c,d)</code> をそれぞれ1から9まで動かした
+                        <code>9⁴ = 6561</code> 組について、
+                        どの整数が作れるのかを調べた。
+                    </p>
+
+                    <p>
+                        結果、もっとも作りやすかったのは10ではなかった。
+                    </p>
+
+                    <p>
+                        1位は2で、6561組中6549組。
+                        続いて3、4、6、1、5、7と並び、10は8位だった。
+                    </p>
+
+                    <div class="result-box">
+                        <span class="result-label">10を作れる組</span>
+                        <strong>6189 / 6561</strong>
+                        <span>≈ 94.33%</span>
+                    </div>
+
+                    <p>
+                        つまり10は最強ではない。
+                        しかし、十分に「作りやすい数字」ではあった。
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span>2.</span> 数字の順番を無視してみる</h2>
+
+                    <p>
+                        ただし、この6561組には問題がある。
+                    </p>
+
+                    <p>
+                        1234と4321は、10パズルとして見れば同じ問題である。
+                    </p>
+
+                    <p>
+                        そこで、
+                    </p>
+
+                    <div class="equation">
+                        1 ≤ a ≤ b ≤ c ≤ d ≤ 9
+                    </div>
+
+                    <p>だけを考えることにした。</p>
+
+                    <div class="equation">
+                        C(12, 4) = <strong>495</strong>
+                    </div>
+
+                    <p>
+                        この495種類のうち、10を作れるものは447種類。
+                    </p>
+
+                    <div class="result-box">
+                        <span class="result-label">順序を無視した場合</span>
+                        <strong>447 / 495</strong>
+                        <span>≈ 90.30%</span>
+                    </div>
+
+                    <p>
+                        逆に言えば、10を作れない組は48種類しかない。
+                    </p>
+
+                    <div class="discovery">
+                        <p class="discovery-label">Discovery</p>
+                        <p>
+                            四つの数字がすべて異なる組は、
+                            <strong>一つ残らず10を作ることができた。</strong>
+                        </p>
+                    </div>
+
+                    <p>
+                        1から9までの異なる四数字の選び方は126通りある。
+                    </p>
+
+                    <p>
+                        その126通りすべてが10を作れる。
+                    </p>
+
+                    <p>
+                        10を作れない48組には、
+                        必ず同じ数字が二つ以上含まれていた。
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span>3.</span> 重複すると、表現の自由度が減る</h2>
+
+                    <p>理由の一端は分かりやすい。</p>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>型</th>
+                                    <th>順列</th>
+                                    <th>生の探索候補</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>abcd</td><td>24</td><td>7680</td></tr>
+                                <tr><td>aabc</td><td>12</td><td>3840</td></tr>
+                                <tr><td>aabb</td><td>6</td><td>1920</td></tr>
+                                <tr><td>aaab</td><td>4</td><td>1280</td></tr>
+                                <tr><td>aaaa</td><td>1</td><td>320</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        実際、10を作れない48組を分類すると、
+                    </p>
+
+                    <ul>
+                        <li>全部異なる：0組</li>
+                        <li>1ペア：22組</li>
+                        <li>2ペア：8組</li>
+                        <li>3個同じ：14組</li>
+                        <li>全部同じ：4組</li>
+                    </ul>
+
+                    <p>
+                        数字の重複によって「式の自由度」が失われ、
+                        作れる整数に穴が開きやすくなる。
+                    </p>
+
+                    <p>
+                        これはかなり自然な説明に見えた。
+                    </p>
+
+                    <p class="turn">
+                        しかし、ここから話がおかしくなっていく。
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span>4.</span> 「表現力が低いから10を作れない」わけではない</h2>
+
+                    <p>
+                        各数字組について、10だけを見るのではなく
+                        「整数を全部で何種類作れるか」を数えてみた。
+                    </p>
+
+                    <p>
+                        予想通り、同じ数字ばかりの組は
+                        作れる整数も少ない傾向があった。
+                    </p>
+
+                    <p>
+                        ところが10を作れない組の中にも、
+                        <code>6899</code>、<code>5799</code>、
+                        <code>5788</code>、<code>3779</code>、
+                        <code>4899</code>……
+                        といった、非常に多くの整数を作れる組が存在した。
+                    </p>
+
+                    <blockquote>
+                        「10を作れない組は、そもそも何も作れない」
+                        わけではない。
+                    </blockquote>
+
+                    <p>
+                        問題は、作れる整数の「数」ではなく、
+                    </p>
+
+                    <p class="center-emphasis">
+                        どこに穴が開いているか
+                    </p>
+
+                    <p>
+                        らしい。
+                    </p>
+
+                    <p>
+                        そこで、10を作れない48組について、
+                        1から24までの各整数が作れるかを調べた。
+                    </p>
+
+                    <p>
+                        ここで、一匹の妙な存在が現れた。
+                    </p>
+                </section>
+
+                <section class="feature-section">
+                    <p class="feature-kicker">a strange combination</p>
+
+                    <div class="digits" aria-label="2 2 5 7">
+                        <span>2</span>
+                        <span>2</span>
+                        <span>5</span>
+                        <span>7</span>
+                    </div>
+
+                    <h2>2257という奇妙な組</h2>
+
+                    <p>
+                        2, 2, 5, 7。
+                    </p>
+
+                    <p>
+                        この四数字は、1から24までの整数のうち、
+                    </p>
+
+                    <p class="feature-statement">
+                        10以外をすべて作ることができる。
+                    </p>
+
+                    <p>
+                        1も作れる。2も3も4も作れる。9も作れる。
+                    </p>
+
+                    <p>
+                        11も12も作れる。
+                        20も21も22も23も24も作れる。
+                    </p>
+
+                    <p>
+                        しかし10だけは作れない。
+                    </p>
+
+                    <div class="number-line">
+                        <span>−15</span>
+                        <span>…</span>
+                        <strong>−10</strong>
+                        <span>…</span>
+                        <span>9</span>
+                        <strong>10</strong>
+                        <span>11</span>
+                        <span>…</span>
+                        <span>24</span>
+                    </div>
+
+                    <p>
+                        この範囲で欠けているのは
+                        <strong>−10 と +10だけ</strong>だった。
+                    </p>
+
+                    <p>
+                        2257はむしろ非常に密に整数を生成している。
+                    </p>
+
+                    <p>
+                        その中に、10という一点だけが穴として残っている。
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span>6.</span> 「作れる回数」を数えてみる</h2>
+
+                    <p>
+                        そこで今度は、整数が作れるかどうかだけではなく、
+                        探索中にその整数へ何回到達したかを数えた。
+                    </p>
+
+                    <div class="table-wrap compact">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>整数</th>
+                                    <th>到達回数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>8</td><td>66</td></tr>
+                                <tr><td>9</td><td>2</td></tr>
+                                <tr class="zero"><td>10</td><td>0</td></tr>
+                                <tr><td>11</td><td>24</td></tr>
+                                <tr><td>12</td><td>138</td></tr>
+                                <tr><td>13</td><td>30</td></tr>
+                                <tr><td>14</td><td>1</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        10は0。
+                    </p>
+
+                    <p>
+                        しかし興味深いことに、14もわずか1回しか現れない。
+                    </p>
+
+                    <p>その一本の式は、</p>
+
+                    <div class="equation">
+                        7 ÷ ((5 ÷ 2) − 2) = 14
+                    </div>
+
+                    <p>
+                        つまり <code>5 / 2 − 2 = 1 / 2</code> を作り、
+                        <code>7 ÷ (1 / 2) = 14</code> とする。
+                    </p>
+
+                    <p>
+                        普通、人間が2257から14を作ろうとすれば、
+                        <code>7 × 2 = 14</code> を最初に考えたくなる。
+                    </p>
+
+                    <p>
+                        しかしそれでは残った2と5を消費できない。
+                    </p>
+
+                    <p>
+                        実際の唯一の経路は、
+                        「残り三数字から1/2を作って7をそれで割る」という、
+                        かなり逆向きの発想を要求するものだった。
+                    </p>
+
+                    <p>
+                        −14にも同様に一本だけの道があり、
+                    </p>
+
+                    <div class="equation">
+                        7 ÷ (2 − (5 / 2)) = −14
+                    </div>
+
+                    <p>
+                        となる。
+                    </p>
+
+                    <p>
+                        2257には、こうした非常に細い道が存在する。
+                    </p>
+
+                    <p>
+                        9には2本。14には1本。
+                    </p>
+
+                    <p class="center-emphasis">
+                        それでも10には、一本もない。
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span>7.</span> では、10の周辺が薄いのか</h2>
+
+                    <p>
+                        2257だけを見れば、そう考えたくなる。
+                    </p>
+
+                    <p>
+                        9は2回しか作れず、10は0回。
+                    </p>
+
+                    <p>
+                        10周辺はもともと「薄い領域」であり、
+                        その谷底が偶然0になったのではないか。
+                    </p>
+
+                    <p>
+                        そこで同じく10を作れず、しかも1〜24の大部分を作れる
+                        <code>1399</code>、<code>3669</code>、
+                        <code>3779</code> を比較した。
+                    </p>
+
+                    <p>すると、この説明も崩れた。</p>
+
+                    <div class="equation">
+                        3669 → 9:35　10:0　11:15　12:191
+                    </div>
+
+                    <p>
+                        10のすぐ近くには何十、何百という経路が存在する。
+                    </p>
+
+                    <p>
+                        それでも10だけは0になる。
+                    </p>
+
+                    <div class="holes">
+                        <div><code>2257</code><span>10</span></div>
+                        <div><code>1399</code><span>8, 10, 23</span></div>
+                        <div><code>3669</code><span>10, 19, 23</span></div>
+                        <div><code>3779</code><span>10, 16, 21</span></div>
+                    </div>
+
+                    <p>
+                        各数字組は、それぞれ異なる場所に穴を持っている。
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span>8.</span> 数字が大きいと、結果が外へ飛んでいく</h2>
+
+                    <p>
+                        比較対象として1234を見ると、別の特徴があった。
+                    </p>
+
+                    <div class="equation multiline">
+                        1234 → 1:269　2:340　3:225<br>
+                        4:303　5:234　6:308
+                    </div>
+
+                    <p>
+                        小さい整数に非常に多くの経路が集中していた。
+                    </p>
+
+                    <p>
+                        一方3779などでは、1〜24の頻度が全体的に低い。
+                    </p>
+
+                    <p>
+                        そこで各数字組について、
+                        生成された整数 <code>x</code> を到達回数で重み付けし、
+                    </p>
+
+                    <div class="equation">
+                        Σ |x| count(x) / Σ count(x)
+                    </div>
+
+                    <p>を計算した。</p>
+
+                    <div class="table-wrap compact">
+                        <table>
+                            <tbody>
+                                <tr><td>1234</td><td>7.977</td></tr>
+                                <tr><td>2257</td><td>23.975</td></tr>
+                                <tr><td>1399</td><td>44.862</td></tr>
+                                <tr><td>3669</td><td>68.145</td></tr>
+                                <tr><td>3779</td><td>105.689</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        3779は1234の十倍以上、外側へ結果を飛ばしている。
+                    </p>
+
+                    <p>
+                        したがって、3779の1〜24が薄く見えたのは、
+                        少なくとも一部は単なる「観測窓」の問題だった。
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span>9.</span> 意外にきれいだった「生成値のスケール」</h2>
+
+                    <p>
+                        では、生成値の大きさは入力数字とどのような関係にあるのだろう。
+                    </p>
+
+                    <p>
+                        495組すべてを用いて、
+                    </p>
+
+                    <div class="equation">
+                        mean|x| ≈ C(a + b + c + d)<sup>p</sup>
+                    </div>
+
+                    <p>
+                        というモデルをlog-log回帰した。
+                    </p>
+
+                    <div class="big-result">
+                        <span>mean|x| ≈</span>
+                        <strong>0.01093(a+b+c+d)<sup>2.78926</sup></strong>
+                        <small>R² = 0.97134</small>
+                    </div>
+
+                    <p>
+                        比較として四数字の積を用いると、
+                    </p>
+
+                    <div class="equation">
+                        mean|x| ≈ 1.38781(abcd)<sup>0.59274</sup>
+                    </div>
+
+                    <p>
+                        で、<code>R² = 0.94813</code> だった。
+                    </p>
+
+                    <p>
+                        積も強い。
+                    </p>
+
+                    <p>
+                        しかし意外なことに、単純な「四数字の和」のほうが
+                        生成値の典型的な大きさをよく説明した。
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span>10.</span> それでも10の穴は消えなかった</h2>
+
+                    <p>
+                        では、10を作れない組は、
+                        単に通常より外側へ結果を飛ばしやすいのだろうか。
+                    </p>
+
+                    <p>
+                        先ほどの回帰を利用し、
+                    </p>
+
+                    <div class="equation">
+                        Q = mean|x| / (a+b+c+d)<sup>2.78926</sup>
+                    </div>
+
+                    <p>という正規化量を作った。</p>
+
+                    <div class="comparison">
+                        <div>
+                            <span>10可</span>
+                            <strong>0.01099164</strong>
+                        </div>
+
+                        <div>
+                            <span>10不可</span>
+                            <strong>0.01185465</strong>
+                        </div>
+
+                        <div>
+                            <span>ratio</span>
+                            <strong>1.07851</strong>
+                        </div>
+                    </div>
+
+                    <p>
+                        確かに10不可組は、平均して約8%ほど外側へ散りやすい。
+                    </p>
+
+                    <p>
+                        しかし、その差は決定的ではない。
+                    </p>
+
+                    <p>
+                        2257のように中央領域をほぼ完全に埋めながら
+                        10だけを落とす現象を、この値だけで説明することは難しい。
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span>11.</span> 結局、「10を作れない組」とは何だったのか</h2>
+
+                    <p>
+                        最初は、もっときれいな答えがあると思っていた。
+                    </p>
+
+                    <p>
+                        偶数と奇数の個数。数字の和。数字の積。
+                        重複の数。作れる整数の総数。生成値の広がり。
+                    </p>
+
+                    <p>
+                        どこかに一本の境界線があって、
+                        その向こう側に1177や2257が並んでいるのではないか。
+                    </p>
+
+                    <p>
+                        しかし、少なくとも今回調べた範囲では、
+                        そのような単純な性質は見つからなかった。
+                    </p>
+
+                    <div class="three-effects">
+                        <article>
+                            <span>01</span>
+                            <h3>数字の重複</h3>
+                            <p>
+                                数字が重なると順列の自由度が減り、
+                                生成可能な式の構造も縮む。
+                            </p>
+                        </article>
+
+                        <article>
+                            <span>02</span>
+                            <h3>入力数字のスケール</h3>
+                            <p>
+                                数字が大きくなると生成値は外側へ散り、
+                                小さい整数領域は相対的に疎になる。
+                            </p>
+                        </article>
+
+                        <article>
+                            <span>03</span>
+                            <h3>算術的な相性</h3>
+                            <p>
+                                途中で作れる分数や分割、
+                                最後の演算への接続可能性が穴の位置を左右する。
+                            </p>
+                        </article>
+                    </div>
+
+                    <p>
+                        これが最後まで残った。
+                    </p>
+
+                    <p>
+                        2257では10。
+                        1399では8、10、23。
+                        3669では10、19、23。
+                        3779では10、16、21。
+                    </p>
+
+                    <p>
+                        四つの数字が、途中でどの分数を作れるか。
+                        どの二群に分割できるか。
+                        最後の一回の加減乗除で目的値へ接続できるか。
+                    </p>
+
+                    <p>
+                        そうした離散的な構造の積み重ねによって、
+                        数直線上に小さな穴が残る。
+                    </p>
+
+                    <blockquote>
+                        10は、その穴の一つなのである。
+                    </blockquote>
+                </section>
+
+                <section class="conclusion">
+                    <h2><span>12.</span> 「きれいな法則がなかった」という結果</h2>
+
+                    <p>
+                        これは少し残念な結果でもある。
+                    </p>
+
+                    <p>
+                        「10を作れない組には、実はこんな共通法則がある」
+                    </p>
+
+                    <p>
+                        という一行で終われたら、とても気持ちがいい。
+                    </p>
+
+                    <p>
+                        しかし実際に全探索してみると、
+                        現象はそれほど素直ではなかった。
+                    </p>
+
+                    <p>
+                        それでも、何も分からなかったわけではない。
+                    </p>
+
+                    <div class="final-findings">
+                        <div>
+                            <span>Finding 01</span>
+                            <strong>
+                                異なる四数字なら、必ず10を作れる。
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Finding 02</span>
+                            <strong>
+                                mean|x| ≈ 0.01093(a+b+c+d)<sup>2.78926</sup>
+                            </strong>
+                        </div>
+
+                        <div class="highlight">
+                            <span>And still...</span>
+                            <strong>2257</strong>
+                        </div>
+                    </div>
+
+                    <p>
+                        1から24まで、ほとんど何でも作れる。
+                    </p>
+
+                    <p>
+                        非常に細い道を使えば14すら作れる。
+                    </p>
+
+                    <p>
+                        しかし10だけは、どうしても作れない。
+                    </p>
+
+                    <p>
+                        最初の問いは、
+                    </p>
+
+                    <blockquote>
+                        「10は作りやすい数字なのか？」
+                    </blockquote>
+
+                    <p>
+                        だった。
+                    </p>
+
+                    <p>
+                        答えは、たしかに作りやすい。
+                    </p>
+
+                    <p>
+                        だが、それ以上に面白かったのは、
+                    </p>
+
+                    <p class="final-line">
+                        作りやすいはずの10が、なぜかそこだけ抜け落ちることがある。
+                    </p>
+
+                    <p>
+                        連続的な「作りやすさ」の中に、
+                        四則演算の離散的な構造が小さな穴を開ける。
+                    </p>
+
+                    <p>
+                        その穴には、単純な統計量だけでは説明できない個性がある。
+                    </p>
+
+                    <p>
+                        1177から始まった小さな10パズルは、
+                        最後にはそんな景色を見せてくれた。
+                    </p>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <span>© baseka</span>
+
+            <div class="footer-links">
+                <a
+                    href="https://x.com/BaseBaseka"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >X</a>
+
+                <a
+                    href="https://soundcloud.com/user-900569136"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >SoundCloud</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -142,6 +142,19 @@ h2 {
     color: var(--muted);
 }
 
+.experiments {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+@media (max-width: 700px) {
+    .experiments {
+        grid-template-columns: 1fr;
+    }
+}
+
+
 .more {
     margin-top: auto;
     color: var(--accent);

@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Analytics tag goes here -->
+
+    <title>Why Can We Make 10? | baseka.net</title>
+
+    <meta
+        name="description"
+        content="An exhaustive search through four digits and the four basic arithmetic operations to investigate why 10 is so often possible in the 10 Puzzle."
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="site-logo" href="/">baseka.net</a>
+
+            <nav class="site-nav" aria-label="Primary">
+                <a href="/">Home</a>
+                <a href="/#works">Works</a>
+                <a href="/#experiments">Experiments</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <header class="article-hero">
+                <div class="wrap article-width">
+<div class="eyebrow-row">
+    <p class="eyebrow">experiment / 10 puzzle</p>
+
+    <a class="language-link"
+       href="ja/experiments/10-puzzle/">
+        日本語
+    </a>
+</div>
+                    <h1>Why Can We Make 10?</h1>
+
+                    <p class="subtitle">
+                        Brute-forcing four digits and the four basic arithmetic operations
+                    </p>
+
+                    <p class="intro">
+                        “Can 1, 1, 7, and 7 make 10 using only arithmetic?”
+                    </p>
+
+                    <p>
+                        That small question was where this experiment began.
+                    </p>
+
+                    <p>
+                        Each of the four digits may be used exactly once.
+                        The allowed operations are addition, subtraction,
+                        multiplication, and division, with parentheses placed freely.
+                        This is the puzzle commonly known as the “10 Puzzle.”
+                    </p>
+
+                    <p>
+                        An exhaustive search showed that 1177 cannot make 10.
+                    </p>
+
+                    <p>
+                        But how unusual is that?
+                    </p>
+
+                    <p>
+                        Is 10 naturally easy to construct from four digits?
+                        Or does it only feel that way because we are accustomed
+                        to thinking in base ten?
+                    </p>
+
+                    <p>
+                        To investigate, I let a computer enumerate every possible
+                        expression for four digits chosen from 1 through 9.
+                    </p>
+                </div>
+            </header>
+
+            <div class="wrap article-width article-body">
+                <section>
+                    <h2><span>1.</span> 10 really is easy to make</h2>
+
+                    <p>
+                        Let the four digits be <code>(a, b, c, d)</code>.
+                    </p>
+
+                    <p>The allowed operations are:</p>
+
+                    <div class="equation">
+                        +　−　×　÷
+                    </div>
+
+                    <p>
+                        The digits may be rearranged freely, and parentheses may
+                        be placed in any valid way.
+                    </p>
+
+                    <p>
+                        There are five binary-tree parenthesization structures
+                        for four operands.
+                        The three operators can be chosen in
+                        <code>4³ = 64</code> ways, and if all four digits
+                        are distinct, there are 24 permutations.
+                    </p>
+
+                    <p>
+                        Therefore, the maximum number of raw candidates is:
+                    </p>
+
+                    <div class="equation">
+                        24 × 64 × 5 = <strong>7680</strong>
+                    </div>
+
+                    <p>
+                        Intermediate values were stored as reduced fractions
+                        rather than floating-point numbers, avoiding cases where
+                        something merely “close to 10” might accidentally be
+                        classified as exactly 10.
+                    </p>
+
+                    <p>
+                        First, I examined all
+                        <code>9⁴ = 6561</code> ordered quadruples
+                        where each digit ranges from 1 through 9,
+                        and recorded which integers each quadruple could produce.
+                    </p>
+
+                    <p>
+                        The easiest integer to make was not 10.
+                    </p>
+
+                    <p>
+                        The most common target was 2,
+                        reachable by 6549 of the 6561 quadruples.
+                        It was followed by 3, 4, 6, 1, 5, and 7.
+                        10 ranked eighth.
+                    </p>
+
+                    <div class="result-box">
+                        <span class="result-label">Quadruples that can make 10</span>
+                        <strong>6189 / 6561</strong>
+                        <span>≈ 94.33%</span>
+                    </div>
+
+                    <p>
+                        So 10 is not the easiest number to make.
+                    </p>
+
+                    <p>
+                        But it is certainly an easy one.
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span>2.</span> Ignoring digit order</h2>
+
+                    <p>
+                        There is a problem with counting all 6561 ordered quadruples.
+                    </p>
+
+                    <p>
+                        In the context of the 10 Puzzle,
+                        1234 and 4321 are really the same problem.
+                    </p>
+
+                    <p>So instead, consider only:</p>
+
+                    <div class="equation">
+                        1 ≤ a ≤ b ≤ c ≤ d ≤ 9
+                    </div>
+
+                    <p>
+                        The number of such multisets is:
+                    </p>
+
+                    <div class="equation">
+                        C(12, 4) = <strong>495</strong>
+                    </div>
+
+                    <p>
+                        Of those 495 digit combinations,
+                        447 can make 10.
+                    </p>
+
+                    <div class="result-box">
+                        <span class="result-label">Ignoring order</span>
+                        <strong>447 / 495</strong>
+                        <span>≈ 90.30%</span>
+                    </div>
+
+                    <p>
+                        That leaves only 48 combinations that cannot make 10.
+                    </p>
+
+                    <p>
+                        Looking at those 48 revealed a remarkably clean property.
+                    </p>
+
+                    <div class="discovery">
+                        <p class="discovery-label">Discovery</p>
+                        <p>
+                            If all four digits are distinct,
+                            <strong>10 can always be made.</strong>
+                        </p>
+                    </div>
+
+                    <p>
+                        There are
+                        <code>C(9,4) = 126</code>
+                        ways to choose four distinct digits from 1 through 9.
+                    </p>
+
+                    <p>
+                        Every one of those 126 combinations can make 10.
+                    </p>
+
+                    <p>
+                        Every combination that fails to make 10 contains
+                        at least one repeated digit.
+                    </p>
+
+                    <p>
+                        This was one of the simplest and most beautiful properties
+                        found in the experiment.
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span>3.</span> Repetition reduces expressive freedom</h2>
+
+                    <p>
+                        Part of the reason is straightforward.
+                    </p>
+
+                    <p>
+                        If all four digits are distinct,
+                        an <code>abcd</code> pattern has 24 permutations.
+                    </p>
+
+                    <p>
+                        Repeated digits reduce that number:
+                    </p>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pattern</th>
+                                    <th>Permutations</th>
+                                    <th>Raw candidates</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>abcd</td><td>24</td><td>7680</td></tr>
+                                <tr><td>aabc</td><td>12</td><td>3840</td></tr>
+                                <tr><td>aabb</td><td>6</td><td>1920</td></tr>
+                                <tr><td>aaab</td><td>4</td><td>1280</td></tr>
+                                <tr><td>aaaa</td><td>1</td><td>320</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        The 48 combinations that cannot make 10 can be classified as:
+                    </p>
+
+                    <ul>
+                        <li>All distinct: 0</li>
+                        <li>One pair: 22</li>
+                        <li>Two pairs: 8</li>
+                        <li>Three identical digits: 14</li>
+                        <li>All identical: 4</li>
+                    </ul>
+
+                    <p>
+                        Repeated digits reduce the structural freedom available
+                        to an expression, making holes in the set of reachable
+                        integers more likely.
+                    </p>
+
+                    <p>
+                        That seems like a very natural explanation.
+                    </p>
+
+                    <p class="turn">
+                        But this is where things begin to get strange.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>
+                        <span>4.</span>
+                        Failure to make 10 does not mean low expressive power
+                    </h2>
+
+                    <p>
+                        Instead of looking only at 10,
+                        I counted how many different integers each digit
+                        combination could generate.
+                    </p>
+
+                    <p>
+                        As expected, combinations with many repeated digits
+                        tended to generate fewer integers.
+                    </p>
+
+                    <p>
+                        However, some combinations that cannot make 10,
+                        such as
+                        <code>6899</code>,
+                        <code>5799</code>,
+                        <code>5788</code>,
+                        <code>3779</code>,
+                        and <code>4899</code>,
+                        can still generate a very large number of integers.
+                    </p>
+
+                    <blockquote>
+                        A combination that cannot make 10 is not necessarily
+                        bad at making numbers.
+                    </blockquote>
+
+                    <p>
+                        The interesting quantity therefore seemed to be not
+                        how many integers were reachable, but:
+                    </p>
+
+                    <p class="center-emphasis">
+                        where the holes are
+                    </p>
+
+                    <p>
+                        So I examined which integers from 1 through 24
+                        were reachable for each of the 48 combinations
+                        that cannot make 10.
+                    </p>
+
+                    <p>
+                        One particularly strange creature appeared.
+                    </p>
+                </section>
+
+                <section class="feature-section">
+                    <p class="feature-kicker">a strange combination</p>
+
+                    <div class="digits" aria-label="2 2 5 7">
+                        <span>2</span>
+                        <span>2</span>
+                        <span>5</span>
+                        <span>7</span>
+                    </div>
+
+                    <h2>5. The strange case of 2257</h2>
+
+                    <p>
+                        2, 2, 5, 7.
+                    </p>
+
+                    <p>
+                        Among the integers from 1 through 24,
+                        these four digits can make:
+                    </p>
+
+                    <p class="feature-statement">
+                        every number except 10.
+                    </p>
+
+                    <p>
+                        It can make 1.
+                        It can make 2, 3, and 4.
+                        It can make 9.
+                    </p>
+
+                    <p>
+                        It can make 11 and 12.
+                        It can make 20, 21, 22, 23, and 24.
+                    </p>
+
+                    <p>
+                        But it cannot make 10.
+                    </p>
+
+                    <p>
+                        Looking at all generated integers,
+                        the central region has the following shape:
+                    </p>
+
+                    <div class="number-line">
+                        <span>−15</span>
+                        <span>…</span>
+                        <strong>−10</strong>
+                        <span>…</span>
+                        <span>9</span>
+                        <strong>10</strong>
+                        <span>11</span>
+                        <span>…</span>
+                        <span>24</span>
+                    </div>
+
+                    <p>
+                        In this range, the only missing values are:
+                    </p>
+
+                    <p class="center-emphasis">
+                        −10 and +10
+                    </p>
+
+                    <p>
+                        This is difficult to explain merely by saying
+                        that 2257 has low expressive power.
+                    </p>
+
+                    <p>
+                        On the contrary, it generates integers very densely.
+                    </p>
+
+                    <p>
+                        And yet a single hole remains at 10.
+                    </p>
+                </section>
+
+                <section>
+                    <h2><span>6.</span> Counting the number of paths</h2>
+
+                    <p>
+                        Next, instead of recording only whether an integer was
+                        reachable, I counted how many expressions in the search
+                        reached each integer.
+                    </p>
+
+                    <p>
+                        Around 10, the counts for 2257 were:
+                    </p>
+
+                    <div class="table-wrap compact">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Integer</th>
+                                    <th>Occurrences</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr><td>8</td><td>66</td></tr>
+                                <tr><td>9</td><td>2</td></tr>
+                                <tr class="zero"><td>10</td><td>0</td></tr>
+                                <tr><td>11</td><td>24</td></tr>
+                                <tr><td>12</td><td>138</td></tr>
+                                <tr><td>13</td><td>30</td></tr>
+                                <tr><td>14</td><td>1</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        10 appears zero times.
+                    </p>
+
+                    <p>
+                        Interestingly, 14 appears only once.
+                    </p>
+
+                    <p>
+                        What is that one expression?
+                    </p>
+
+                    <div class="equation">
+                        7 ÷ ((5 ÷ 2) − 2) = 14
+                    </div>
+
+                    <p>
+                        First:
+                    </p>
+
+                    <div class="equation">
+                        5 / 2 − 2 = 1 / 2
+                    </div>
+
+                    <p>
+                        Then:
+                    </p>
+
+                    <div class="equation">
+                        7 ÷ (1 / 2) = 14
+                    </div>
+
+                    <p>
+                        A human trying to make 14 from 2257 would probably
+                        start with <code>7 × 2 = 14</code>.
+                    </p>
+
+                    <p>
+                        But then the remaining 2 and 5 still have to be consumed.
+                    </p>
+
+                    <p>
+                        The unique valid route approaches the problem almost
+                        backwards: make one-half from the other three digits,
+                        then divide 7 by it.
+                    </p>
+
+                    <p>
+                        There is similarly only one route to −14:
+                    </p>
+
+                    <div class="equation">
+                        7 ÷ (2 − (5 / 2)) = −14
+                    </div>
+
+                    <p>
+                        So 2257 contains some extremely narrow paths.
+                    </p>
+
+                    <p>
+                        There are two paths to 9.
+                    </p>
+
+                    <p>
+                        One path to 14.
+                    </p>
+
+                    <p class="center-emphasis">
+                        And still no path at all to 10.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>
+                        <span>7.</span>
+                        Is the region around 10 simply sparse?
+                    </h2>
+
+                    <p>
+                        Looking only at 2257, this seems plausible.
+                    </p>
+
+                    <p>
+                        There are only two paths to 9,
+                        and zero paths to 10.
+                    </p>
+
+                    <p>
+                        Perhaps the region around 10 is already a low-density valley,
+                        and 10 simply happens to fall all the way to zero.
+                    </p>
+
+                    <p>
+                        To test this idea, I compared other combinations
+                        that cannot make 10 while still reaching most integers
+                        from 1 through 24:
+                    </p>
+
+                    <ul>
+                        <li>1399</li>
+                        <li>3669</li>
+                        <li>3779</li>
+                    </ul>
+
+                    <p>
+                        This explanation also broke down.
+                    </p>
+
+                    <p>
+                        For 3669:
+                    </p>
+
+                    <div class="equation">
+                        9:35　10:0　11:15　12:191
+                    </div>
+
+                    <p>
+                        There are dozens or even hundreds of paths immediately
+                        around 10.
+                    </p>
+
+                    <p>
+                        Yet 10 itself remains at zero.
+                    </p>
+
+                    <p>
+                        Looking at the missing integers from 1 through 24:
+                    </p>
+
+                    <div class="holes">
+                        <div>
+                            <code>2257</code>
+                            <span>10</span>
+                        </div>
+
+                        <div>
+                            <code>1399</code>
+                            <span>8, 10, 23</span>
+                        </div>
+
+                        <div>
+                            <code>3669</code>
+                            <span>10, 19, 23</span>
+                        </div>
+
+                        <div>
+                            <code>3779</code>
+                            <span>10, 16, 21</span>
+                        </div>
+                    </div>
+
+                    <p>
+                        Each digit combination has holes in different places.
+                    </p>
+
+                    <p>
+                        Since these combinations were selected specifically
+                        because they fail to make 10,
+                        the only hole they necessarily share is 10 itself.
+                    </p>
+
+                    <p>
+                        A simple one-dimensional notion of “local sparsity”
+                        therefore did not seem sufficient.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>
+                        <span>8.</span>
+                        Larger digits push results outward
+                    </h2>
+
+                    <p>
+                        Comparing against 1234 revealed another feature.
+                    </p>
+
+                    <p>
+                        For 1234:
+                    </p>
+
+                    <div class="equation multiline">
+                        1:269　2:340　3:225<br>
+                        4:303　5:234　6:308
+                    </div>
+
+                    <p>
+                        There are many paths to small integers.
+                    </p>
+
+                    <p>
+                        By contrast, combinations such as 3779 show much lower
+                        frequencies within the range 1 through 24.
+                    </p>
+
+                    <p>
+                        Perhaps larger input digits simply scatter results
+                        toward larger absolute values.
+                    </p>
+
+                    <p>
+                        So for each digit combination,
+                        I calculated the frequency-weighted mean absolute value
+                        of the generated integers:
+                    </p>
+
+                    <div class="equation">
+                        Σ |x| count(x) / Σ count(x)
+                    </div>
+
+                    <p>
+                        The results were:
+                    </p>
+
+                    <div class="table-wrap compact">
+                        <table>
+                            <tbody>
+                                <tr><td>1234</td><td>7.977</td></tr>
+                                <tr><td>2257</td><td>23.975</td></tr>
+                                <tr><td>1399</td><td>44.862</td></tr>
+                                <tr><td>3669</td><td>68.145</td></tr>
+                                <tr><td>3779</td><td>105.689</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        3779 pushes its generated results outward more than
+                        ten times as strongly as 1234.
+                    </p>
+
+                    <p>
+                        So the apparent sparsity of 3779 within 1 through 24
+                        is at least partly an artifact of the observation window.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>
+                        <span>9.</span>
+                        A surprisingly clean scale law
+                    </h2>
+
+                    <p>
+                        How, then, does the typical size of generated values
+                        depend on the input digits?
+                    </p>
+
+                    <p>
+                        I first considered:
+                    </p>
+
+                    <div class="equation">
+                        mean|x| / (a+b+c+d)
+                    </div>
+
+                    <p>
+                        But this quantity increased as the digits became larger.
+                    </p>
+
+                    <p>
+                        The scale of generated values therefore does not grow
+                        linearly with the sum of the input digits.
+                    </p>
+
+                    <p>
+                        Using all 495 combinations,
+                        I performed a log-log regression of the form:
+                    </p>
+
+                    <div class="equation">
+                        mean|x| ≈ C(a+b+c+d)<sup>p</sup>
+                    </div>
+
+                    <p>
+                        The result was:
+                    </p>
+
+                    <div class="big-result">
+                        <span>mean|x| ≈</span>
+
+                        <strong>
+                            0.01093(a+b+c+d)<sup>2.78926</sup>
+                        </strong>
+
+                        <small>R² = 0.97134</small>
+                    </div>
+
+                    <p>
+                        The fit is remarkably strong.
+                    </p>
+
+                    <p>
+                        For comparison, using the product of the four digits gives:
+                    </p>
+
+                    <div class="equation">
+                        mean|x| ≈ 1.38781(abcd)<sup>0.59274</sup>
+                    </div>
+
+                    <p>
+                        with:
+                    </p>
+
+                    <div class="equation">
+                        R² = 0.94813
+                    </div>
+
+                    <p>
+                        The product is also highly predictive.
+                    </p>
+
+                    <p>
+                        But surprisingly, the simple sum of the four input digits
+                        explains the typical scale of the generated values
+                        even better.
+                    </p>
+
+                    <p>
+                        This was another unexpectedly clean empirical rule
+                        produced by the search.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>
+                        <span>10.</span>
+                        And still, the hole at 10 remains
+                    </h2>
+
+                    <p>
+                        Could the combinations that fail to make 10 simply be
+                        combinations whose results spread farther outward
+                        than usual?
+                    </p>
+
+                    <p>
+                        Using the regression above,
+                        I defined the normalized quantity:
+                    </p>
+
+                    <div class="equation">
+                        Q = mean|x| / (a+b+c+d)<sup>2.78926</sup>
+                    </div>
+
+                    <p>
+                        Comparing the 447 combinations that can make 10
+                        with the 48 that cannot:
+                    </p>
+
+                    <div class="comparison">
+                        <div>
+                            <span>Can make 10</span>
+                            <strong>0.01099164</strong>
+                        </div>
+
+                        <div>
+                            <span>Cannot make 10</span>
+                            <strong>0.01185465</strong>
+                        </div>
+
+                        <div>
+                            <span>Ratio</span>
+                            <strong>1.07851</strong>
+                        </div>
+                    </div>
+
+                    <p>
+                        On average, combinations that cannot make 10 do scatter
+                        their results about 8% farther outward.
+                    </p>
+
+                    <p>
+                        But the difference is not decisive.
+                    </p>
+
+                    <p>
+                        In particular, it does not explain something like 2257,
+                        which densely fills the central region while leaving
+                        almost exactly one hole at 10.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>
+                        <span>11.</span>
+                        So what are the combinations that cannot make 10?
+                    </h2>
+
+                    <p>
+                        At first, I expected there to be a cleaner answer.
+                    </p>
+
+                    <p>
+                        The number of even and odd digits.
+                    </p>
+
+                    <p>
+                        The sum of the digits.
+                    </p>
+
+                    <p>
+                        Their product.
+                    </p>
+
+                    <p>
+                        The number of repeated digits.
+                    </p>
+
+                    <p>
+                        The total number of reachable integers.
+                    </p>
+
+                    <p>
+                        The spread of the generated values.
+                    </p>
+
+                    <p>
+                        I expected some single boundary to exist,
+                        with combinations like 1177 and 2257 sitting
+                        naturally on one side of it.
+                    </p>
+
+                    <p>
+                        At least within this experiment,
+                        no such simple property appeared.
+                    </p>
+
+                    <p>
+                        Instead, three effects emerged.
+                    </p>
+
+                    <div class="three-effects">
+                        <article>
+                            <span>01</span>
+                            <h3>Repeated digits</h3>
+
+                            <p>
+                                Repetition reduces the number of distinct
+                                permutations and expression structures,
+                                making holes more likely.
+                            </p>
+                        </article>
+
+                        <article>
+                            <span>02</span>
+                            <h3>Input scale</h3>
+
+                            <p>
+                                Larger digits push generated values outward,
+                                making the small-integer region relatively sparse.
+                            </p>
+                        </article>
+
+                        <article>
+                            <span>03</span>
+                            <h3>Arithmetic compatibility</h3>
+
+                            <p>
+                                Reachable intermediate fractions, possible
+                                partitions, and the final operation all influence
+                                exactly where individual holes remain.
+                            </p>
+                        </article>
+                    </div>
+
+                    <p>
+                        The third effect is what remained hardest to reduce
+                        to a simple statistic.
+                    </p>
+
+                    <p>
+                        For 2257, the hole is 10.
+                    </p>
+
+                    <p>
+                        For 1399, the holes include 8, 10, and 23.
+                    </p>
+
+                    <p>
+                        For 3669, they include 10, 19, and 23.
+                    </p>
+
+                    <p>
+                        For 3779, they include 10, 16, and 21.
+                    </p>
+
+                    <p>
+                        Which fractions can be produced along the way?
+                    </p>
+
+                    <p>
+                        How can the four digits be divided into two subexpressions?
+                    </p>
+
+                    <p>
+                        Can those subexpressions be connected to the target
+                        by one final addition, subtraction, multiplication,
+                        or division?
+                    </p>
+
+                    <p>
+                        Small holes remain on the number line as a consequence
+                        of these discrete structural constraints.
+                    </p>
+
+                    <blockquote>
+                        10 is one of those holes.
+                    </blockquote>
+                </section>
+
+                <section class="conclusion">
+                    <h2>
+                        <span>12.</span>
+                        The result was that there was no simple rule
+                    </h2>
+
+                    <p>
+                        This result is slightly disappointing.
+                    </p>
+
+                    <p>
+                        It would have been satisfying to finish with a single sentence:
+                    </p>
+
+                    <blockquote>
+                        “Combinations that cannot make 10 all share this property.”
+                    </blockquote>
+
+                    <p>
+                        But exhaustive search showed that the phenomenon
+                        is not that simple.
+                    </p>
+
+                    <p>
+                        Still, the experiment did not end empty-handed.
+                    </p>
+
+                    <p>
+                        At least one very clean fact emerged:
+                    </p>
+
+                    <div class="final-findings">
+                        <div>
+                            <span>Finding 01</span>
+
+                            <strong>
+                                Any four distinct digits from 1 through 9 can make 10.
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Finding 02</span>
+
+                            <strong>
+                                mean|x| ≈
+                                0.01093(a+b+c+d)<sup>2.78926</sup>
+                            </strong>
+                        </div>
+
+                        <div class="highlight">
+                            <span>And still...</span>
+                            <strong>2257</strong>
+                        </div>
+                    </div>
+
+                    <p>
+                        It can make almost everything from 1 through 24.
+                    </p>
+
+                    <p>
+                        With an extremely narrow route,
+                        it can even make 14.
+                    </p>
+
+                    <p>
+                        But it simply cannot make 10.
+                    </p>
+
+                    <p>
+                        The original question was:
+                    </p>
+
+                    <blockquote>
+                        “Is 10 an easy number to make?”
+                    </blockquote>
+
+                    <p>
+                        The answer is yes.
+                    </p>
+
+                    <p>
+                        But what turned out to be more interesting was this:
+                    </p>
+
+                    <p class="final-line">
+                        Even though 10 is easy to make,
+                        sometimes it alone disappears.
+                    </p>
+
+                    <p>
+                        Within a continuous sense of “makeability,”
+                        the discrete structure of arithmetic expressions
+                        punches small holes into the number line.
+                    </p>
+
+                    <p>
+                        Those holes have individual character that cannot be
+                        explained by a single simple statistic.
+                    </p>
+
+                    <p>
+                        What began as a tiny puzzle about 1177 eventually
+                        led to that landscape.
+                    </p>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <span>© baseka</span>
+
+            <div class="footer-links">
+                <a
+                    href="https://x.com/BaseBaseka"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >X</a>
+
+                <a
+                    href="https://soundcloud.com/user-900569136"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >SoundCloud</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
