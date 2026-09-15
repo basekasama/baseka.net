@@ -99,7 +99,7 @@ h2 {
 
 .works {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
 }
 
@@ -256,6 +256,54 @@ footer {
     object-fit: cover;
 
     object-position: center 30%;
+}
+
+.support {
+    margin-top: 24px;
+    color: var(--muted);
+}
+
+.about-title {
+    margin: 0 0 8px;
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.support {
+    margin-top: 24px;
+    color: var(--muted);
+}
+
+.support-link,
+.support-link:visited {
+    display: block;
+    margin-top: 8px;
+    color: var(--accent);
+    font-family: monospace;
+    text-decoration: none;
+}
+
+.support-link:hover {
+    color: var(--text);
+}
+
+.contact {
+    margin-top: 20px;
+    color: var(--muted);
+}
+
+.contact-link,
+.contact-link:visited {
+    display: block;
+    margin-top: 8px;
+    color: var(--accent);
+    font-family: monospace;
+    text-decoration: none;
+}
+
+.contact-link:hover {
+    color: var(--text);
 }
 
 
