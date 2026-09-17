@@ -60,77 +60,107 @@ nav a:hover,
 }
 
 main {
-    padding: 72px 0 96px;
+    padding: 88px 0 104px;
 }
 
 .hero {
-    margin-bottom: 72px;
+    max-width: 760px;
 }
 
 .eyebrow,
-.meta {
+.info-label {
     color: var(--accent);
     font-family: monospace;
     font-size: 0.9rem;
 }
 
 h1 {
-    margin: 8px 0 12px;
-    font-size: clamp(2.8rem, 7vw, 5rem);
-    line-height: 1;
+    margin: 8px 0 16px;
+    font-size: clamp(3.4rem, 9vw, 6.4rem);
+    line-height: 0.95;
 }
 
 .lead {
-    max-width: 640px;
+    margin: 0;
     color: var(--muted);
-    font-size: 1.1rem;
-}
-
-.software-section {
-    margin-top: 56px;
-}
-
-.software-section h2 {
-    margin-bottom: 16px;
     font-size: 1.2rem;
 }
 
-.software-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-}
-
-.software-card {
+.hero-actions {
     display: flex;
     flex-direction: column;
-    min-height: 220px;
-    padding: 24px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 36px;
 }
 
-.software-card h3 {
-    margin: 6px 0 10px;
-    font-size: 1.4rem;
-}
-
-.description {
-    margin: 0 0 24px;
-    color: var(--muted);
-}
-
-.project-link,
-.project-link:visited {
-    margin-top: auto;
+.play-button,
+.play-button:visited {
+    display: inline-block;
+    padding: 12px 18px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
     color: var(--accent);
     font-family: monospace;
     text-decoration: none;
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
 }
 
-.project-link:hover {
-    color: var(--text);
+.play-button:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.play-note {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.about-game {
+    max-width: 720px;
+    margin-top: 88px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border);
+}
+
+.about-game p {
+    margin: 0 0 24px;
+    font-size: 1.08rem;
+}
+
+.game-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 64px;
+}
+
+.info-card {
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.info-card p {
+    margin: 0;
+}
+
+.info-label {
+    margin-bottom: 8px !important;
+}
+
+.bottom-play {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+}
+
+.bottom-play p {
+    margin: 0 0 16px;
+    color: var(--muted);
 }
 
 footer {
@@ -148,23 +178,6 @@ footer {
     gap: 16px;
 }
 
-.project-links {
-    display: flex;
-    gap: 16px;
-    margin-top: auto;
-}
-
-.project-link,
-.project-link:visited {
-    color: var(--accent);
-    font-family: monospace;
-    text-decoration: none;
-}
-
-.project-link:hover {
-    color: var(--text);
-}
-
 @media (max-width: 640px) {
     .site-header,
     footer {
@@ -174,10 +187,10 @@ footer {
     }
 
     main {
-        padding-top: 48px;
+        padding-top: 56px;
     }
 
-    .software-grid {
+    .game-info {
         grid-template-columns: 1fr;
     }
 }
