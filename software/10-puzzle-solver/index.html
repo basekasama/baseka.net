@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>10 Puzzle Solver | baseka.net</title>
+
+    <meta
+        name="description"
+        content="A browser-based solver for the 10 Puzzle."
+    >
+
+    <meta property="og:title" content="10 Puzzle Solver | baseka.net">
+    <meta
+        property="og:description"
+        content="A browser-based solver for the 10 Puzzle."
+    >
+    <meta property="og:type" content="website">
+    <meta
+        property="og:url"
+        content="https://baseka.net/software/10-puzzle-solver/"
+    >
+
+    <link rel="icon" href="/assets/favicon.png">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-211JBWZPSH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag()
+        {
+            dataLayer.push(arguments);
+        }
+
+        gtag("js", new Date());
+        gtag("config", "G-211JBWZPSH");
+    </script>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a class="site-title" href="/">baseka.net</a>
+
+        <nav>
+            <a href="/#works">Works</a>
+            <a href="/#about">About</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <p class="eyebrow">browser tool</p>
+
+            <h1>10 Puzzle Solver</h1>
+
+            <p class="lead">
+                Enter four digits and find a way to make the target.
+            </p>
+        </section>
+
+        <section class="solver-section">
+
+            <div id="solver-area" class="solver-area">
+
+<div class="puzzle">
+    <div class="solver-field">
+        <label for="numbers">Numbers</label>
+        <input
+            id="numbers"
+            type="text"
+            inputmode="numeric"
+            maxlength="4"
+            value="1234"
+        >
+    </div>
+
+    <div class="solver-field">
+        <label for="target">Target</label>
+        <input
+            id="target"
+            type="number"
+            value="10"
+        >
+    </div>
+
+    <button id="solve" class="solve-button">
+        Solve
+    </button>
+
+    <div id="result" class="solver-result"></div>
+</div>
+
+<script type="module" src="./app.js"></script>
+
+            </div>
+
+        </section>
+
+        <section class="about-section">
+            <p>
+                Curious about the puzzle itself?
+            </p>
+
+            <a
+                class="article-link"
+                href="/experiments/10-puzzle/"
+            >
+                Read the 10 Puzzle experiment →
+            </a>
+        </section>
+
+    </main>
+
+    <footer>
+        <a
+            href="https://x.com/BaseBaseka"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            X
+        </a>
+
+        <a
+            href="https://soundcloud.com/user-900569136"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            SoundCloud
+        </a>
+    </footer>
+
+</body>
+</html>

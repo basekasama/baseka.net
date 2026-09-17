@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google Analytics tag goes here -->
-
     <title>Software | baseka.net</title>
 
     <meta
@@ -19,7 +17,10 @@
         content="Software and small interactive projects by baseka."
     >
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://baseka.net/software/">
+    <meta
+        property="og:url"
+        content="https://baseka.net/software/"
+    >
     <meta
         property="og:image"
         content="https://baseka.net/assets/baseka-icon.jpg"
@@ -27,9 +28,24 @@
 
     <link rel="icon" href="/assets/favicon.png" type="image/png">
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-211JBWZPSH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag()
+        {
+            dataLayer.push(arguments);
+        }
+
+        gtag("js", new Date());
+        gtag("config", "G-211JBWZPSH");
+    </script>
 </head>
 
 <body>
+
     <header class="site-header">
         <a class="site-title" href="/">baseka.net</a>
 
@@ -40,6 +56,7 @@
     </header>
 
     <main>
+
         <section class="hero">
             <p class="eyebrow">software</p>
 
@@ -54,6 +71,7 @@
             <h2>Projects</h2>
 
             <div class="software-grid">
+
                 <article class="software-card">
                     <p class="meta">Browser game</p>
 
@@ -79,8 +97,29 @@
                         </a>
                     </div>
                 </article>
+
+                <article class="software-card">
+                    <p class="meta">Browser tool</p>
+
+                    <h3>10 Puzzle Solver</h3>
+
+                    <p class="description">
+                        A browser-based solver for the 10 Puzzle.
+                    </p>
+
+                    <div class="project-links">
+                        <a
+                            class="project-link"
+                            href="/software/10-puzzle-solver/"
+                        >
+                            Open →
+                        </a>
+                    </div>
+                </article>
+
             </div>
         </section>
+
     </main>
 
     <footer>
@@ -104,5 +143,6 @@
             </a>
         </div>
     </footer>
+
 </body>
 </html>
