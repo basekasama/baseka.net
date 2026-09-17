@@ -580,17 +580,17 @@ tr:last-child td {
 }
 
 .solver-cta {
-    margin-top: 36px;
-    padding: 20px 24px;
+    margin-top: 32px;
+    padding: 22px 20px;
+
+    background: #15181d;
 
     border: 1px solid #292e36;
     border-left: 3px solid #8fd3ff;
-
-    background: #15181d;
 }
 
 .solver-cta-label {
-    margin: 0 0 8px;
+    margin: 0 0 6px;
 
     color: #9299a3;
 
