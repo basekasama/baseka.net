@@ -8,7 +8,7 @@
 
     <meta
         name="description"
-        content="allotimer is a browser tool that randomly allocates your available time across activities based on their priorities."
+        content="allotimer is a browser tool for building flexible time plans with fixed durations, weighted allocation, and a little randomness."
     >
 
     <meta property="og:title" content="allotimer | baseka.net">
@@ -75,15 +75,17 @@
 
         <section class="about-tool">
             <p>
-                allotimer randomly allocates your available time across activities
-                based on their priorities, with a little randomness mixed in.
+                allotimer helps you divide a limited block of time across activities.
+                Give each activity a <code class="ui-term">WEIGHT</code>, reserve a
+                <code class="ui-term">FIXED</code> amount of time, or combine both
+                in the same plan.
             </p>
 
             <p>
-                Start the timer, and your plan changes with you:
-                activities that run over their allocation gradually take time
-                from the others, turning the original plan into a picture of
-                where your time actually went.
+                Generate an allocation, lock the times you want to keep, and reroll
+                the rest. Once the timer starts, actual time gradually reshapes the
+                original allocation, turning the plan into a record of where your
+                time really went.
             </p>
         </section>
 
@@ -95,23 +97,36 @@
                     <p class="step-number">01</p>
                     <h3>Add activities</h3>
                     <p>
-                        List what you want to do and give each activity a priority.
+                        List the things you want to do.
                     </p>
                 </article>
 
                 <article class="step-card">
                     <p class="step-number">02</p>
-                    <h3>Allot your time</h3>
+                    <h3>Plan the time</h3>
                     <p>
-                        Let weighted randomness turn your available time into a plan.
+                        Use <code class="ui-term">WEIGHT</code> for flexible priorities
+                        or <code class="ui-term">FIXED</code> for time you want to reserve.
                     </p>
                 </article>
 
                 <article class="step-card">
                     <p class="step-number">03</p>
-                    <h3>See what happened</h3>
+                    <h3>Lock and reroll</h3>
                     <p>
-                        Run the timer and watch the plan become your actual time distribution.
+                        Generate a plan, <code class="ui-term">LOCK</code> the allocations
+                        you like, and <code class="ui-term">REROLL</code> only the rest.
+                    </p>
+                </article>
+
+                <article class="step-card">
+                    <p class="step-number">04</p>
+                    <h3>Track and compare</h3>
+                    <p>
+                        Run the timer as actual time reshapes the allocation. When you
+                        finish, compare <code class="ui-term">PLANNED</code> and
+                        <code class="ui-term">ACTUAL</code> totals, plus each activity's
+                        allocated and actual time.
                     </p>
                 </article>
             </div>
@@ -122,9 +137,10 @@
 
             <p>
                 I wanted a way to decide how to spend a limited block of free time
-                without planning every minute myself. So I built a weighted-random
-                time allocator that gradually transforms its original budget into
-                your actual time distribution.
+                without planning every minute myself. So I built a time allocator
+                that combines fixed commitments with weighted randomness, then
+                gradually transforms its original plan into your actual time
+                distribution.
             </p>
         </section>
 
