@@ -19,6 +19,27 @@
     globalThis.NumerologyPriority.createExplorer(indexes[language],language==='ja'?globalThis.NumerologyRomaji:undefined,language==='en'?globalThis.NumerologyUsSex:undefined)])) : null;
   let explorerOpen = false, explorerResult = null, fixedComponent = '', fixedValue = '', explorerPage = 1;
   const text = () => globalThis.InverseText[locale];
+  const friendlyLabels = {
+    ja: {
+      jaDataset: '日本語の名前',
+      enDataset: '米国の名前（2024年）',
+      r33: '11・22・33を残す',
+      r0: '1〜9へ還元',
+      passportA: '通常の表記',
+      passportOff: '表記：通常の表記',
+      passportOn: '表記：通常＋パスポート型'
+    },
+    en: {
+      jaDataset: 'Japanese names',
+      enDataset: 'US names (2024)',
+      r33: 'Keep 11, 22 and 33',
+      r0: 'Reduce to 1–9',
+      passportA: 'Standard spelling',
+      passportOff: 'Spelling: standard',
+      passportOn: 'Spelling: standard + passport-inspired'
+    }
+  };
+  const label = key => friendlyLabels[locale][key] ?? text()[key];
   const format = (s, ...values) => s.replace(/\{(\d+)\}/g, (_, i) => String(values[Number(i)]));
   const number = n => n.toLocaleString(locale);
   function options(select, pairs, selected) {
@@ -36,7 +57,7 @@
     byId('sex-panel').hidden=ja;
     byId('passport-panel').hidden=!ja; byId('passport-note').hidden=!usePassport();
     byId('matching-spellings-note').hidden=!usePassport();
-    byId('scope').textContent = text()[ja ? 'jaScope' : 'enScope']+(ja?' '+text()[usePassport()?'passportOn':'passportOff']:' '+sexScope());
+    byId('scope').textContent = text()[ja ? 'jaScope' : 'enScope']+(ja?' '+label(usePassport()?'passportOn':'passportOff'):' '+sexScope());
     byId('source-details').textContent = text()[ja ? 'jaDetails' : 'enDetails'];
     byId('priority-details').hidden = !ja;
     byId('sample').textContent = text()[ja ? 'sampleJa' : 'sampleEn'];
@@ -75,7 +96,7 @@
     byId('view-title').textContent = text()['view_'+result.view];
     byId('rows').replaceChildren(...result.candidates.map(candidate => {
       const row = document.createElement('tr');
-      const values = [candidate.name,candidate.matches ? candidate.matches.map(m=>m.letters+'〈'+text()[m.mode==='A'?'passportA':'passportB']+'〉').join('\n') : candidate.letters,...(ja ? [] : [number(candidate.count),
+      const values = [candidate.name,candidate.matches ? candidate.matches.map(m=>m.letters+'〈'+label(m.mode==='A'?'passportA':'passportB')+'〉').join('\n') : candidate.letters,...(ja ? [] : [number(candidate.count),
         candidate.dictionaryConditionalShare.toLocaleString(locale,{style:'percent',minimumFractionDigits:4,maximumFractionDigits:4})])];
       values.forEach((value,i) => {
         const cell = document.createElement(i === 0 ? 'th' : 'td');
@@ -108,8 +129,8 @@
   function applyLanguage() {
     const old = {dictionary:dictionary.value || 'ja',rule:rule.value || 'R33',weight:weight.value || 'Uniform'};
     for (const node of document.querySelectorAll('[data-inverse-text]')) { node.textContent = text()[node.dataset.inverseText]; }
-    options(dictionary,[['ja',text().jaDataset],['en',text().enDataset]],old.dictionary);
-    options(rule,[['R33',text().r33],['R0',text().r0]],old.rule);
+    options(dictionary,[['ja',label('jaDataset')],['en',label('enDataset')]],old.dictionary);
+    options(rule,[['R33',label('r33')],['R0',label('r0')]],old.rule);
     options(sex,[['',text().sexAny],['M',text().sexM],['F',text().sexF]],sex.value);
     fillWeight(old.weight); fillNumbers(); scope(); render();
     if (explorerOpen) { refreshExplorer(); }
@@ -137,7 +158,7 @@
     byId('combinations').replaceChildren();
     options(byId('fix'),[['',text().noFilter],['E','E'],['S','S'],['P','P']],fixedComponent);
     byId('value-field').hidden = !fixedComponent;
-    const scopeText = normalized => format(text().browseScope,text()[dictionary.value==='ja'?'jaDataset':'enDataset'],rule.value,normalized || text().anyInitial)+(dictionary.value==='ja'?' '+text()[usePassport()?'passportOn':'passportOff']:' '+sexScope());
+    const scopeText = normalized => format(text().browseScope,label(dictionary.value==='ja'?'jaDataset':'enDataset'),label(rule.value==='R33'?'r33':'r0'),normalized || text().anyInitial)+(dictionary.value==='ja'?' '+label(usePassport()?'passportOn':'passportOff'):' '+sexScope());
     byId('browse-scope').textContent = scopeText(initial.value);
     if (!explorers) { byId('browse-status').textContent = text().unavailable; return; }
     try {
