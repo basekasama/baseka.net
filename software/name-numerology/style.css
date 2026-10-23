@@ -228,3 +228,29 @@ html[lang="ja"] .tool-copy-en, html[lang="en"] .tool-copy-ja { display: none; }
 
 .sex-field { margin-top: 14px; }
 #inverse-sex { max-width: 220px; }
+
+/* Optional forward readings; inverse layouts are unchanged. */
+.optional-tools { margin-top: 14px; }
+.optional-tools > details { border: 1px solid #e4dde4; border-radius: 12px; background: #fffefa; margin-top: 10px; }
+.optional-tools > details > summary { padding: 14px 18px; color: #60435f; font-weight: 600; cursor: pointer; }
+.optional-tools summary:focus-visible { outline: 2px solid #70516f; outline-offset: 3px; }
+.optional-content { padding: 0 20px 20px; overflow-wrap: anywhere; }
+.optional-content h3 { margin-top: 24px; font-size: 1.05rem; }
+.optional-content p { line-height: 1.85; }
+.optional-spelling { font-weight: 600; }
+.optional-date-fields { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; max-width: 540px; }
+.optional-date-fields > div { min-width: 0; }
+.optional-date-fields input { width: 100%; min-width: 0; }
+.optional-birth-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.optional-card { border: 1px solid #ded6e2; border-radius: 12px; padding: 18px; background: #f7f1f8; min-width: 0; }
+.optional-card h3 { margin: 0; }
+.optional-card .optional-number { font-size: 2.8rem; line-height: 1.2; margin: 12px 0; color: #70516f; }
+.optional-card h4 { margin: 12px 0; }
+.optional-method { margin-top: 14px; }
+.optional-calculation { font-variant-numeric: tabular-nums; }
+@media (max-width: 600px) {
+  .optional-birth-cards { grid-template-columns: 1fr; }
+  .optional-content { padding: 0 14px 16px; }
+  .optional-tools .actions { align-items: stretch; }
+  .optional-tools .actions button { white-space: normal; max-width: 100%; }
+}

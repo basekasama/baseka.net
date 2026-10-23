@@ -14,11 +14,14 @@
   <meta property="og:url" content="https://baseka.net/software/name-numerology/">
   <meta property="og:image" content="https://baseka.net/assets/baseka-icon.jpg">
   <link rel="icon" href="/assets/favicon.png" type="image/png">
-  <link rel="stylesheet" href="style.css?v=priority-mit-20261023.1">
+  <link rel="stylesheet" href="style.css?v=optional-20261023.1">
   <script defer src="data.js?v=priority-mit-20261023.1"></script>
   <script defer src="core.js?v=priority-mit-20261023.1"></script>
   <script defer src="passport.js?v=priority-mit-20261023.1"></script>
-  <script defer src="app.js?v=priority-mit-20261023.1"></script>
+  <script defer src="optional-data.js?v=optional-20261023.1"></script>
+  <script defer src="optional-core.js?v=optional-20261023.1"></script>
+  <script defer src="optional-app.js?v=optional-20261023.1"></script>
+  <script defer src="app.js?v=optional-20261023.1"></script>
   <script defer src="comparison-app.js?v=priority-mit-20261023.1"></script>
   <script defer src="inverse-content.js?v=priority-mit-20261023.1"></script>
   <script defer src="inverse-lookup.js?v=priority-mit-20261023.1"></script>
@@ -27,7 +30,7 @@
   <script defer src="romaji-data.js?v=priority-mit-20261023.1"></script>
   <script defer src="us-sex-data.js?v=priority-mit-20261023.1"></script>
   <script defer src="priority-lookup.js?v=priority-mit-20261023.1"></script>
-  <script defer src="inverse-app.js?v=priority-mit-20261023.1"></script>
+  <script defer src="inverse-app.js?v=optional-20261023.1"></script>
   <script defer src="tool-switcher.js?v=priority-mit-20261023.1"></script>
 </head>
 <body>
@@ -96,6 +99,33 @@
       <h2 id="result-title" aria-live="polite"></h2>
       <p class="result-hint muted" data-text="resultHint"></p>
       <div id="cards" class="cards"></div>
+    </section>
+    <section class="optional-tools" data-private data-hj-suppress data-clarity-mask>
+      <details id="optional-name" hidden>
+        <summary data-optional-text="nameHeading"></summary>
+        <div id="optional-name-content" class="optional-content"></div>
+      </details>
+      <details id="optional-birth">
+        <summary data-optional-text="birthHeading"></summary>
+        <div class="optional-content">
+          <p data-optional-text="birthIntro"></p>
+          <p class="muted" id="birth-privacy" data-optional-text="privacy"></p>
+          <form id="birth-form" novalidate autocomplete="off" aria-describedby="birth-privacy birth-hint">
+            <div class="optional-date-fields">
+              <div><label for="birth-year" data-optional-text="year"></label><input id="birth-year" type="text" inputmode="numeric" maxlength="4" autocomplete="off" spellcheck="false"></div>
+              <div><label for="birth-month" data-optional-text="month"></label><input id="birth-month" type="text" inputmode="numeric" maxlength="2" autocomplete="off" spellcheck="false"></div>
+              <div><label for="birth-day" data-optional-text="day"></label><input id="birth-day" type="text" inputmode="numeric" maxlength="2" autocomplete="off" spellcheck="false"></div>
+            </div>
+            <p id="birth-hint" class="field-hint" data-optional-text="dateHint"></p>
+            <div class="actions">
+              <button type="submit" id="birth-calculate" data-optional-text="calculate"></button>
+              <button type="button" id="birth-clear" class="secondary" data-optional-text="clear"></button>
+            </div>
+          </form>
+          <p id="birth-status" role="status" aria-live="polite" hidden></p>
+          <div id="birth-results" aria-live="polite" hidden></div>
+        </div>
+      </details>
     </section>
     <footer class="tool-notes">
       <details>

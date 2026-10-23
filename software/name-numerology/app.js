@@ -17,6 +17,7 @@
   }
   function clearResult() {
     result = null;
+    globalThis.NumerologyOptionalUI.setNameResult(null);
     byId('cards').replaceChildren();
     byId('results').hidden = true;
     byId('empty').hidden = false;
@@ -51,6 +52,7 @@
     byId('cards').replaceChildren(...cards);
     byId('results').hidden = false;
     byId('empty').hidden = true;
+    globalThis.NumerologyOptionalUI.setNameResult(result);
   }
   function applyLanguage() {
     document.documentElement.lang = locale;
