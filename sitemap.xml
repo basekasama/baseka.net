@@ -20,6 +20,22 @@
     <url>
         <loc>https://baseka.net/ja/experiments/10-puzzle/</loc>
     </url>
+
+    <url>
+        <loc>https://baseka.net/experiments/numerology-in-reverse/</loc>
+    </url>
+
+    <url>
+        <loc>https://baseka.net/ja/experiments/numerology-in-reverse/</loc>
+    </url>
+
+    <url>
+        <loc>https://baseka.net/experiments/numerology-in-reverse/appendix-2/</loc>
+    </url>
+
+    <url>
+        <loc>https://baseka.net/ja/experiments/numerology-in-reverse/appendix-2/</loc>
+    </url>
 <url>
     <loc>https://baseka.net/writing/</loc>
 </url>
@@ -58,6 +74,10 @@
 
 <url>
     <loc>https://baseka.net/software/allotimer/play/</loc>
+</url>
+
+<url>
+    <loc>https://baseka.net/software/name-numerology/</loc>
 </url>
 
 </urlset>

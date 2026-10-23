@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-211JBWZPSH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-211JBWZPSH');
+    </script>
+
+    <title>数秘術を逆にしたら、名前はどこまでわかるのか | baseka.net</title>
+    <meta name="description" content="名前を数秘術の三つの数字からどこまで絞れるか。米国と日本の名前データで逆検索と情報量を調べた実験。">
+    <link rel="canonical" href="https://baseka.net/ja/experiments/numerology-in-reverse/">
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/experiments/numerology-in-reverse/style.css">
+
+    <meta property="og:title" content="数秘術を逆にしたら、名前はどこまでわかるのか | baseka.net">
+    <meta property="og:description" content="名前を数秘術の三つの数字からどこまで絞れるか。米国と日本の名前データで逆検索と情報量を調べた実験。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://baseka.net/ja/experiments/numerology-in-reverse/">
+    <meta property="og:image" content="https://baseka.net/assets/baseka-icon.jpg">
+
+    <link rel="alternate" hreflang="en" href="https://baseka.net/experiments/numerology-in-reverse/">
+    <link rel="alternate" hreflang="ja" href="https://baseka.net/ja/experiments/numerology-in-reverse/">
+
+    <script>
+      MathJax = {
+        tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+        options: { enableMenu: false }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body class="article-page">
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="site-logo" href="/">baseka.net</a>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="/">Home</a>
+                <a href="/#works">Works</a>
+                <a href="/#experiments">Experiments</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <header class="article-hero">
+                <div class="wrap article-width">
+                    <div class="eyebrow-row">
+                        <p class="eyebrow">experiment / numerology in reverse</p>
+                        <a class="language-link" href="/experiments/numerology-in-reverse/">English</a>
+                    </div>
+                    <h1>数秘術を逆にしたら、名前はどこまでわかるのか</h1>
+                    <p class="subtitle">――米国と日本の名前で、数字に残った手がかりを探してみた</p>
+                </div>
+            </header>
+
+            <div class="wrap article-width article-body">
+<p>数秘術では、名前を数字に変えて占う。</p>
+<p>では、その数字から名前に戻ることはできるのだろうか。</p>
+<p>たとえば、「9・22・5」。</p>
+<p>今回調べた米国の2024年出生データでは、この三つの数字になる名前は13種類あった。ところが、この条件に一致する掲載人数の約98.3％を、Theodoreという一つの名前が占めていた。</p>
+<p>名前は聞いていない。ただ、計算結果を教えてもらっただけだ。</p>
+<p>「Theodoreさん、ですか？」</p>
+<p>データの対象と同じ集団を想定するなら、そんな推測がかなり強くなる組み合わせがある。</p>
+<p>一方、日本語の「まゆ」と「あゆみ」は、どちらも「6・4・11」になる。こちらは、三つの数字だけでは区別がつかない。でもイニシャルがMかAかわかれば、二つを分けられる。</p>
+<p>同じ計算でも、名前の集まり方によって、見えてくるものが違う。</p>
+<p>今回は数秘術の占いとしての解釈をいったん脇に置いて、<strong>計算方法と結果だけから、元の名前をどこまで絞れるか</strong>を調べ、実際に候補を探せるツールを作った。</p>
+<p>米国の名前で、種類と人数の違いを見る。日本語の名前で、イニシャルの効果と名前リストの難しさを見る。そして最後に、そもそも三つの数字を自由には選べない理由を考える。</p>
+<p>気になるところから読めるように、結果は分けてある。</p>
+<p><a href="#us-results">米国の結果へ</a> ／ <a href="#japanese-results">日本語の結果へ</a> ／ <a href="#number-constraints">数字の組み合わせの仕組みへ</a> ／ <a href="appendix-2/">付録2・全組み合わせ表へ（別ページ）</a></p>
+<h2 id="section">1. 名前を数字に変える</h2>
+<p>数秘術にはいろいろな流儀があるらしい。今回はその歴史や解釈には立ち入らず、名前の文字を足し合わせる計算部分だけを使う。</p>
+<p>対象は、姓を含めた氏名全体ではなく、<strong>下の名前</strong>。米国側は公開データのアルファベット表記、日本語側は読みをローマ字に変換したものを使う。</p>
+<p>文字と数字の対応には、ピタゴラス式と呼ばれる方式を採用した。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>数字</th>
+<th>対応する文字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>A・J・S</td>
+</tr>
+<tr>
+<td>2</td>
+<td>B・K・T</td>
+</tr>
+<tr>
+<td>3</td>
+<td>C・L・U</td>
+</tr>
+<tr>
+<td>4</td>
+<td>D・M・V</td>
+</tr>
+<tr>
+<td>5</td>
+<td>E・N・W</td>
+</tr>
+<tr>
+<td>6</td>
+<td>F・O・X</td>
+</tr>
+<tr>
+<td>7</td>
+<td>G・P・Y</td>
+</tr>
+<tr>
+<td>8</td>
+<td>H・Q・Z</td>
+</tr>
+<tr>
+<td>9</td>
+<td>I・R</td>
+</tr>
+</tbody>
+</table></div>
+<p>アルファベット順に1から9を繰り返すだけだ。</p>
+<p>そして、同じ名前から三つの合計を作る。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>記号</th>
+<th>対象</th>
+<th>呼び名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E</td>
+<td>すべての文字</td>
+<td>Expression</td>
+</tr>
+<tr>
+<td>S</td>
+<td>母音だけ</td>
+<td>Soul Urge</td>
+</tr>
+<tr>
+<td>P</td>
+<td>子音だけ</td>
+<td>Personality</td>
+</tr>
+</tbody>
+</table></div>
+<p>今回の母音はA・E・I・O・U。Yは子音として扱う。</p>
+<p>合計が大きくなったら、各桁を足して小さくする。たとえば15なら、1＋5で6になる。</p>
+<p>ただし、本文の例では<strong>11・22・33が現れたら、その数で止める</strong>方式を使う。これらはマスターナンバーと呼ばれ、数秘術では、特に大きな可能性と、それに伴う課題を象徴する特別な数と解釈されることがある。ここでは、その解釈ではなく「そこで計算を止める」という規則を使う。</p>
+<p>なお、最初に文字の値を全部足してから、桁を足す処理を始める。文字を一つ足すたびに途中で還元するわけではない。</p>
+<p>冒頭のTHEODOREなら、次のように計算できる。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>対象</th>
+<th>足し算</th>
+<th>合計 → 結果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全文字：THEODORE</td>
+<td>2＋8＋5＋6＋4＋6＋9＋5</td>
+<td>45 → 9</td>
+</tr>
+<tr>
+<td>母音：EOOE</td>
+<td>5＋6＋6＋5</td>
+<td>22 → 22</td>
+</tr>
+<tr>
+<td>子音：THDR</td>
+<td>2＋8＋4＋9</td>
+<td>23 → 5</td>
+</tr>
+</tbody>
+</table></div>
+<p>これでE・S・Pの順に、<strong>9・22・5</strong>になる。</p>
+<h2 id="section-1">2. 逆算するために、先に全部計算しておく</h2>
+<p>名前から数字が決まるとしても、逆向きには同じ数字になる名前がいくつもあるかもしれない。そこで、元の名前を一つに決める前に、まず候補を全部探すことにした。</p>
+<p>実在する名前を集め、それぞれのE・S・Pをあらかじめ計算する。そして同じ数字になる名前を、同じ箱に入れておく。</p>
+<p>「9・22・5」と入力されたら、その箱を開く。イニシャルもわかっていれば、その文字から始まる名前だけを残す。</p>
+<p>仕組みはこれだけだ。未知の名前を生成するのではなく、登録された名前を照合している。</p>
+<p>ここで早くも、重要な条件が一つある。</p>
+<p><strong>リストに入っていない名前は、どれだけ正しく計算しても出てこない。</strong></p>
+<p>逆向きに探す能力と、そもそも名前を知っているかどうかは、別の問題なのである。</p>
+<div class="tool-cta">
+    <p class="tool-cta-label">TRY THE TOOLS</p>
+    <p>名前から三つの数字を計算することも、数字から名前候補を探すこともできます。</p>
+    <div class="tool-cta-links">
+        <a href="/software/name-numerology/#forward-tool">名前 → 三つの数字</a>
+        <a href="/software/name-numerology/#inverse-tool">三つの数字 → 名前候補</a>
+    </div>
+</div>
+<span class="anchor" id="us-results"></span>
+<h2 id="section-2">3. 米国編：「13候補」と「13分の1」は違う</h2>
+<p>まずは、名前ごとの掲載人数がわかる米国のデータから見てみよう。</p>
+<p>米国側では、社会保障局SSAに由来する、2024年出生分の公開名前データを使った。同じ綴りの男女別件数を合算すると、29,225種類、掲載件数の合計3,328,501件になる。</p>
+<p>ここでは名前の由来にかかわらず、米国の公表データに登場する、アルファベット表記の下の名前を扱う。</p>
+<p>この中で9・22・5になる名前は、13種類あった。すべての種類を同じ重みで扱えば、各候補は13分の1、約7.7％になる。</p>
+<p>しかし、掲載人数で見ると景色が変わる。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>名前</th>
+<th style="text-align: right;">この条件に一致する掲載人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Theodore</td>
+<td style="text-align: right;">12,024</td>
+</tr>
+<tr>
+<td>ほかの12種類の合計</td>
+<td style="text-align: right;">205</td>
+</tr>
+<tr>
+<td>合計</td>
+<td style="text-align: right;">12,229</td>
+</tr>
+</tbody>
+</table></div>
+<p>Theodoreの割合は、</p>
+<div class="math">
+\[
+\frac{12,024}{12,229}\approx 98.3\%
+\]</div>
+<p>になる。</p>
+<p><strong>候補は13種類あるのに、掲載人数の約98％が一つの名前に集まっている。</strong></p>
+<p>Theodoreは、<a href="https://www.ssa.gov/blog/en/posts/2025-05-09.html">同年の男の子の名前で全米4位</a>だった。もともと多い名前が、同じ数字になる名前の中では、さらに圧倒的な割合を占めていた。</p>
+<p>名前の種類を一つ選ぶのか、人を一人選ぶのか。それだけで、「どれくらい当たりそうか」は大きく変わる。</p>
+<p>では、こんなにうまくいく箱ばかりなのだろうか。データ全体でも試してみよう。</p>
+<p>各条件の箱で、掲載人数が最も多い名前を答える。その名前の人数を全箱で足し、総掲載人数で割ったのが、次の表の「1位」の割合だ。「上位10候補」では、各箱で人数の多い順に最大10種類までを選び、同じように集計する。</p>
+<p>最後の行では、イニシャルに加えて、元資料に記録された性別もあらかじめわかっているとした。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>わかっている情報</th>
+<th style="text-align: right;">1位の候補が正解になる割合</th>
+<th style="text-align: right;">上位10候補に正解を含む割合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>追加の手がかりなし</td>
+<td style="text-align: right;">0.67％</td>
+<td style="text-align: right;">4.45％</td>
+</tr>
+<tr>
+<td>イニシャルだけ</td>
+<td style="text-align: right;">7.29％</td>
+<td style="text-align: right;">33.94％</td>
+</tr>
+<tr>
+<td>三つの数字だけ</td>
+<td style="text-align: right;">22.74％</td>
+<td style="text-align: right;">66.19％</td>
+</tr>
+<tr>
+<td>三つの数字＋イニシャル</td>
+<td style="text-align: right;">64.33％</td>
+<td style="text-align: right;">96.10％</td>
+</tr>
+<tr>
+<td>三つの数字＋イニシャル＋性別</td>
+<td style="text-align: right;">72.48％</td>
+<td style="text-align: right;">98.02％</td>
+</tr>
+</tbody>
+</table></div>
+<p>※11・22・33を残す方式。上の4行は性別未指定。同じデータの掲載人数を使って候補を順位付けし、その掲載人数を重みとして集計したもの。</p>
+<p>数字もイニシャルも知らない場合でも、人数の多い名前から順に答えることはできる。その出発点と比べると、数字とイニシャルは、かなり役に立っている。</p>
+<p>性別の手がかりを一つ足すと、1位の正答率は約8ポイント上がった。同じ名前が男女両方に掲載されていれば、どちらの条件でも候補に残し、その区分の人数で順位を付けている。</p>
+<p>96.10％や98.02％は、今回のデータから一人を選び、それぞれの手がかりを使ったとき、上位10候補に正解を含む割合だ。別の年代や、データにない名前に対する成績は、ここからはわからない。</p>
+<p>ここまででは、数字が候補を集め、名前ごとの人数が答える順番を決めていた。では、人数がわからないリストでは、どこまで絞れるだろう。続いて、日本語の名前を見てみよう。</p>
+<span class="anchor" id="japanese-results"></span>
+<h2 id="mayuayumi">4. 日本語編：MAYUとAYUMIは、同じ数字になる</h2>
+<p>日本語側で手がかりにするのは、漢字の字形や画数ではなく、名前の読みをローマ字にしたものだ。</p>
+<p>この記事では、ヘボン式をベースに、長音の母音を省かずに表すプログラム所定の方式を使う。たとえば「ゆうき」はYUUKI、「ゆき」はYUKI、「しおり」はSHIORIになる。以下の日本語の集計は、この表記方式でそろえた。</p>
+<p>「まゆ」はMAYU。「あゆみ」はAYUMI。さらに、似た綴りとは言いにくい「のどか」、NODOKAも並べて計算してみよう。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>名前</th>
+<th>全文字の合計 → E</th>
+<th>母音の合計 → S</th>
+<th>子音の合計 → P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MAYU</td>
+<td>15 → 6</td>
+<td>4 → 4</td>
+<td>11 → 11</td>
+</tr>
+<tr>
+<td>AYUMI</td>
+<td>24 → 6</td>
+<td>13 → 4</td>
+<td>11 → 11</td>
+</tr>
+<tr>
+<td>NODOKA</td>
+<td>24 → 6</td>
+<td>13 → 4</td>
+<td>11 → 11</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三つとも、6・4・11になった。</strong></p>
+<p>長さも違う。文字の並びも違う。それでも三つの数字がすべて一致する。</p>
+<p>AYUMIには、MAYUと同じM・A・Y・Uに加えて、値が9のIがある。全体の合計も母音の合計も9増えるが、最後まで桁を足すと、この例では同じ数字に戻る。そもそも足し算なので、文字の順番も覚えていない。</p>
+<p>ただし、似た綴りに限って起きるわけではない。MAYUとNODOKAで共通する文字はAだけだ。子音はM・YとN・D・Kで全部違うが、その合計はどちらも11になる。</p>
+<p>つまり、この計算には情報の取りこぼしがある。名前から数字は決まるが、数字から元の名前が一つに決まるとは限らない。</p>
+<p>ここに「イニシャルはMです」と足せば、AYUMIとNODOKAは消える。「Aです」ならMAYUとNODOKAが消える。この三つなら、最初の一文字で区別できる。</p>
+<p>では、数万種類の名前を相手にしたらどうだろう。数字とイニシャルで、何候補まで減るのだろうか。</p>
+<h2 id="section-3">5. 日本語編：三万種類の名前は、どこまで減るのか</h2>
+<p>日本語の元の候補リストには、固有名詞辞書<a href="https://www.edrdg.org/enamdict/enamdict_doc.html">JMnedict</a>から、下の名前に該当する項目を選んだ。</p>
+<p>姓や氏名全体の項目を除外し、読みの表記を決めた規則で整理して、計算できるものを残した結果、今回の対象は<strong>33,837種類の読み</strong>になった。</p>
+<p>ここでの一種類は一つの読みだ。同じ読みの漢字表記を何種類集めても、その分だけ候補が増えるわけではない。</p>
+<p>今回の資料には、各読みを持つ人が日本全体に何人いるかという、揃った頻度情報がない。そこで、この33,837種類をすべて同じ確率で選ぶことにして、各名前について「自分と同じ条件に何候補が残るか」を調べた。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>わかっている情報</th>
+<th style="text-align: right;">平均候補数</th>
+<th style="text-align: right;">候補数の中央値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>何も知らない</td>
+<td style="text-align: right;">33,837</td>
+<td style="text-align: right;">33,837</td>
+</tr>
+<tr>
+<td>三つの数字だけ</td>
+<td style="text-align: right;">303.2</td>
+<td style="text-align: right;">303</td>
+</tr>
+<tr>
+<td>イニシャルだけ</td>
+<td style="text-align: right;">2,737.9</td>
+<td style="text-align: right;">2,333</td>
+</tr>
+<tr>
+<td>三つの数字＋イニシャル</td>
+<td style="text-align: right;">26.6</td>
+<td style="text-align: right;">22</td>
+</tr>
+</tbody>
+</table></div>
+<p>※11・22・33を残す方式。優先表示による選別前の、元の辞書全体での集計。母音または子音のない名前も含む。</p>
+<p>三つの数字がわかるだけで、平均では三万余りから約303候補になる。そこにイニシャルを一つ足すと、約27候補まで減った。</p>
+<p>これは、なかなか見てみたくなる数だ。</p>
+<p>数字とイニシャルを合わせて、候補が一つに決まる読みは全体の約1.4％。大半の読みでは、まだ複数の名前が残る。</p>
+<p>この平均では、非常に多い名前も、めったに見かけない名前も、一票ずつ持っている。街で人を一人選ぶ場合とは重みが違うので、日本語版では人数に基づく「当たりそうな確率」は表示していない。</p>
+<p>性別を手がかりにする実験は、男女別の掲載人数を使える米国側だけで行った。日本語側では、読みごとの性別情報を今回の候補辞書に対応づけて検証しておらず、男女別人数も揃っていない。</p>
+<h2 id="section-4">6. 日本語編：名前は出た。でも、ちょっと見慣れない</h2>
+<p>候補を実際に眺めると、次の問題が見えてきた。辞書に載っていることと、日常でよく見かけることは同じではない。</p>
+<p>見慣れない読みも、古風な読みも、外国の名前のように見える読みも出てくる。それらが珍しいというだけで、誤った名前だとは言えない。しかし「あなたの名前はこの中にありますか？」と見せる一覧としては、もう少し見渡しやすくしたかった。</p>
+<p>そこで、元の辞書は残したまま、<strong>先に見せる候補</strong>を選ぶことにした。</p>
+<p>別の公開名前リストにも載っている読みを優先する。今回、この優先候補に該当したのは8,244種類だった。</p>
+<p>これは「日本人の名前の上位何％」というリストではない。資料への掲載を手がかりにした、表示のための選択である。優先候補の並び順も、人口に占める多さの順ではない。</p>
+<p>MAYUとAYUMIに共通する6・4・11では、次のようになった。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>条件</th>
+<th style="text-align: right;">元の辞書で一致する候補</th>
+<th style="text-align: right;">優先表示する候補</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6・4・11</td>
+<td style="text-align: right;">192</td>
+<td style="text-align: right;">53</td>
+</tr>
+<tr>
+<td>6・4・11＋M</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr>
+<td>6・4・11＋A</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">3</td>
+</tr>
+</tbody>
+</table></div>
+<p>Mを指定したときの優先候補は、</p>
+<p><strong>まさただ・まつみ・まゆ・むが・もなこ。</strong></p>
+<p>Aを指定すると、</p>
+<p><strong>あやたか・あくり・あゆみ。</strong></p>
+<p>ちゃんとMAYUとAYUMIが別れた。それでも、どちらも一人には決まらない。資料への掲載を手がかりに選んでいるので、見慣れた名前だけが残るわけでもない。</p>
+<p>別の例も見てみよう。9・7・11にイニシャルAを組み合わせると、元の辞書では20候補。そのうち優先表示するのは、</p>
+<p><strong>あゆむ・あとり・あやめ・ありこ・ありと</strong>の5候補になる。</p>
+<p>この記事の表記方式と固定リストで、11・22・33を残し、イニシャルまで指定すると、最初に見せる候補は<strong>最大25件</strong>に収まった。</p>
+<p>そして、候補が26から5に減った最後の一歩には、数字の情報が増えたわけではない。<strong>見せる名前を選んだ効果も含まれている。</strong></p>
+<p>候補が少なくなっても、その中に正解を残せているとは限らない。だから、優先候補から外れた名前も「ほかの候補を見る」「全候補を見る」から確認できるようにした。</p>
+<h2 id="section-5">7. 日本語編：自分の名前が出てこない</h2>
+<p>それらしい候補が並ぶようになったので、いろいろ試してみた。</p>
+<p>ところが、自分の本名は、見ていた候補の中に見つからなかった。</p>
+<p>作っている側としては、少し困る。</p>
+<p>元の一覧をExcelで探してみると、自分の読みはちゃんと載っていた。33,837種類の候補に含まれていたのである。</p>
+<p>見比べてわかったのは、<strong>普段入力していたローマ字と、辞書が計算に使っていたローマ字が違う</strong>ということだった。自分の場合は、その二つの表記から出る数字も異なっていた。</p>
+<p>仕組みを説明するため、「こうた」を例にしてみよう。今回の辞書ではKOUTAとして計算している。11・22・33を残す方式で、KOTAと比べるとこうなる。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>表記</th>
+<th>全文字の合計 → E</th>
+<th>母音の合計 → S</th>
+<th>子音の合計 → P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KOUTA</td>
+<td>14 → 5</td>
+<td>10 → 1</td>
+<td>4 → 4</td>
+</tr>
+<tr>
+<td>KOTA</td>
+<td>11 → 11</td>
+<td>7 → 7</td>
+<td>4 → 4</td>
+</tr>
+</tbody>
+</table></div>
+<p>Uが一つあるかないかで、5・1・4が11・7・4になる。</p>
+<p>KOTAから出た11・7・4で検索しても、KOUTAとして登録された「こうた」は一致しない。名前が辞書にあっても、開ける箱が違っていたのである。</p>
+<p>KOTAも、自然に使われる表記だ。<a href="https://www.ezairyu.mofa.go.jp/passport/hebon.html">外務省のパスポート用の表記案内</a>にも「コウタ→KOTA」という例がある。用途によって、使うローマ字は違う。</p>
+<p>数秘術の計算でも、<a href="https://tsuduri-illust.com/numerotekeisan">長音の母音を省く例</a>もあれば、<a href="https://esprit-delasse.com/numerology/">仮名に沿って残す例</a>もある。</p>
+<p>そこでツールには、ひらがなの読みからパスポート型の表記とも比較できる機能を加えた。これは旅券の基本規則を参考にした近似で、本人の旅券の綴りを確定するものではない。逆検索でも「パスポート型の表記も含める」を選ぶと、両方の表記から候補を探せる。</p>
+<p>改めて条件を確かめながら検索すると、自分の名前も見つかった。</p>
+<p>辞書にはいた。ただ、同じ読みが載っているだけでは、同じ箱にたどり着けるとは限らなかった。検索するときは、計算に使う綴りも確かめる必要がある。</p>
+<span class="anchor" id="number-constraints"></span>
+<h2 id="section-6">8. 三つの数字を選ぶと、なぜ0件ばかりになるのか</h2>
+<p>ここからは、米国・日本語の両方に共通する計算の話に戻ろう。</p>
+<p>ツールができると、今度は適当な数字を試してみたくなる。</p>
+<p>「じゃあ、この組み合わせなら？」</p>
+<p>0件。</p>
+<p>「こっちは？」</p>
+<p>また0件。</p>
+<p>調べてみると、これは名前リストの不足だけが原因ではなかった。</p>
+<p><strong>三つの数字は、そもそも自由に組み合わせられなかった。</strong></p>
+<p>最初の足し算に戻ろう。母音の合計をV、子音の合計をK、全文字の合計をTとすると、必ず、</p>
+<div class="math">
+\[
+T=V+K
+\]</div>
+<p>である。</p>
+<p>全体を母音と子音に分けただけなのだから、考えてみれば当然だ。</p>
+<p>この関係は、桁を足した後にも痕跡を残す。</p>
+<p>まず11・22・33も特別扱いせず、必ず一桁まで還元する方式を考える。正の整数nを一桁にする関数をdとすると、</p>
+<div class="math">
+\[
+d(n)=1+((n-1)\bmod 9)
+\]</div>
+<p>と書ける。modは「割った余り」のことだ。</p>
+<p>なぜ9なのか。たとえば10a＋bと、桁を足したa＋bの差は9aになる。桁を足すたびに9の倍数を取り除いているので、9で割った余りは変わらないのである。</p>
+<p>このため、母音も子音もある名前では、</p>
+<div class="math">
+\[
+E=d(S+P)
+\]</div>
+<p>が成り立つ。</p>
+<p>SとPが決まった時点で、Eも決まってしまう。</p>
+<p>三つとも1から9なら、見かけ上は9³＝729通り。しかし、この関係を満たすのは、SとPの選び方に対応する<strong>9²＝81通り</strong>だけだ。</p>
+<p>三つの数字を持っていても、独立した三つの手がかりを持っているわけではなかった。</p>
+<h2 id="section-7">9. 11・22・33を残しても、制約は残る</h2>
+<p>では、本文で使っている、11・22・33で止める方式ならどうだろう。</p>
+<p>この場合、SとPだけからEが一つに決まるとは限らない。それでも、桁を足す処理が9で割った余りを変えないことは同じだ。</p>
+<p>したがって、母音と子音がどちらもある場合、少なくとも、</p>
+<div class="math">
+\[
+E\equiv S+P\pmod 9
+\]</div>
+<p>でなければならない。「EとS＋Pは、9で割った余りが同じ」という条件である。</p>
+<p>たとえばS＝4、P＝11なら、S＋Pは15。9で割った余りは6だ。</p>
+<p>Eの選択肢1〜9・11・22・33のうち、同じ余りを持つのは<strong>6と33</strong>だけになる。</p>
+<p>ここで「6しかありえない」と言い切ると、間違える。</p>
+<p>還元前の母音の合計が4、子音の合計が29だった場合を考えると、</p>
+<div class="math">
+\[
+S=4,\qquad P:29\longrightarrow11,\qquad E:4+29=33
+\]</div>
+<p>になるからだ。</p>
+<p>一方、今回の日本語辞書では、6・4・11には192候補あったが、33・4・11は0候補だった。</p>
+<p><strong>足し算として成立することと、その数字になる名前が辞書に載っていることは、別の問題だ。</strong></p>
+<p>33・4・11は、今回の辞書で見つからなかった組である。日本語の名前全体で不可能だと結論するには、別の根拠が要る。</p>
+<p>三つとも数値を取る場合の集計は、次のようになった。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>数えたもの</th>
+<th style="text-align: right;">組み合わせ数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12種類の数字を三つ自由に選ぶ</td>
+<td style="text-align: right;">1,728</td>
+</tr>
+<tr>
+<td>9で割った余りの条件に反する</td>
+<td style="text-align: right;">1,536</td>
+</tr>
+<tr>
+<td>余りの条件だけは満たす</td>
+<td style="text-align: right;">192</td>
+</tr>
+<tr>
+<td>実際に今回の日本語辞書で候補が出る</td>
+<td style="text-align: right;">177</td>
+</tr>
+</tbody>
+</table></div>
+<p>192通りは、余りの条件を通過した組の数だ。実現できる組をすべて確定した数ではない。</p>
+<p>ともあれ、1,728通りの入力を一様に試したとき、候補が出るのは約10.2％。0件が続くのも不思議ではなかった。これは入力の組み合わせについての割合であり、名前リストが何割の人をカバーするかとは別の話だ。</p>
+<p>母音または子音がない場合に候補が出る10組を加えると、日本語辞書で候補がある組は計187組になる。それらも含めた各条件の候補数は、<a href="appendix-2/">別ページの付録2・全組み合わせ表</a>にまとめた。</p>
+<p>では、候補が見つかる組み合わせを入口にしたら、どうだろう。</p>
+<h2 id="section-8">10. 名前から試す。数字から遊ぶ</h2>
+<div class="tool-cta">
+    <p class="tool-cta-label">TRY THE TOOLS</p>
+    <p>名前から三つの数字を計算することも、数字から名前候補を探すこともできます。</p>
+    <div class="tool-cta-links">
+        <a href="/software/name-numerology/#forward-tool">名前 → 三つの数字</a>
+        <a href="/software/name-numerology/#inverse-tool">三つの数字 → 名前候補</a>
+    </div>
+</div>
+<p>ツールには、名前から数字を計算する**「名前 → 数秘術」<strong>と、数字から候補を探す</strong>「数秘術 → 名前」**がある。二つの入力は独立していて、計算用に教えた名前を逆検索の答えに持ち込む仕組みにはしていない。</p>
+<p>まずは、この記事の二つの例を試してみてほしい。計算方式は11・22・33を残すものを選び、日本語の表記は初期設定のままにする。</p>
+<p>米国では、イニシャルと性別を指定せずに<strong>9・22・5</strong>を入れ、掲載人数に基づく割合を見る。Theodoreの約98％と、残り12候補。人数を手がかりにするとはどういうことか、一覧で確かめられる。性別を指定すれば、候補や割合も変わる。</p>
+<p>次は日本語。「まゆ」と「あゆみ」から同じ数字が出ることを計算側で確かめたら、逆検索側で<strong>6・4・11</strong>を入れる。そこへイニシャルMを足し、次にAへ変えてみる。</p>
+<p>数字には触れていないのに、名前の顔ぶれが変わる。さっきまで同じ箱にいた二つの名前を、一文字で分ける瞬間だ。</p>
+<p>答えを知らない箱を開けたいときは、**「組み合わせを見る」**へ。今の条件で候補がある組が並ぶので、0件を繰り返さずに探せる。E・S・Pのどれか一つだけ指定するところからでも始められる。</p>
+<p>日本語で探している名前が見当たらなければ、「ほかの候補を見る」「全候補を見る」も試してみてほしい。最初の一覧の外に残っているかもしれない。</p>
+<h2 id="section-9">11. 数字には、どれくらい名前が残っていたのか</h2>
+<p>名前を足し算にすると、文字の順番は消える。文字の種類や長さが違っても、同じ数字に重なる。三つの数字も互いに関係していて、元の名前を一つに戻せるとは限らなかった。</p>
+<p>それでも、何も残っていないわけではなかった。</p>
+<p>米国のデータでは、数字とイニシャルに掲載人数の情報を合わせると、同じ集団内の集計で上位10候補に約96％を含められた。記録上の性別までわかれば約98％になった。日本語の元の辞書では、数字だけで平均約303候補、イニシャルを加えると約27候補まで絞れた。</p>
+<p>一方で、画面に名前がきれいに並ぶまでには、辞書の選び方や表示順も関わっていた。その工夫で見やすくなった分、最初の一覧から外れる名前もある。日本語では、数字を作る前のローマ字表記までそろえる必要があった。</p>
+<p>最初は、数字から名前を当ててみたかった。</p>
+<p>けれど、箱を一つずつ開けているうちに、そこに集まる名前の顔ぶれも気になってきた。</p>
+<p>数字が候補を集め、最初の一文字がその中を分ける。名前ごとの人数がわかれば、答える順番も変わる。画面に並ぶ名前には、それぞれがそこに残った理由がある。</p>
+<p>「あなたの名前は、〇〇さんですか？」</p>
+<p>一つの名前を探して始めた実験で、いくつもの名前に出会うことになった。同じ三つの数字の向こうにも、こんなに違う名前があった。</p>
+<hr />
+<h2 id="section-10">付録1：候補の集め方、割合と情報の量</h2>
+<p>ここからは、集計方法をもう少し詳しく知りたい人向け。</p>
+<h3 id="section-11">候補を集め、人数から割合を求める</h3>
+<p>名前の集合をD、名前から三つの数字を求める関数をfとする。結果zに対応する候補の集合は、</p>
+<div class="math">
+\[
+C(z)=\{x\in D\mid f(x)=z\}
+\]</div>
+<p>となる。「Dの中から、計算結果がzになる名前を全部集める」という意味だ。本文の「箱」は、この集合に対応する。</p>
+<p>米国のデータ内から掲載人数に比例して名前Xを選び、その計算結果をZとする。名前xの掲載人数をn(x)とすると、数字zがわかったときの各候補の割合は、</p>
+<div class="math">
+\[
+P(X=x\mid Z=z)
+=\frac{n(x)}{\sum_{y\in C(z)}n(y)}
+\qquad(x\in C(z))
+\]</div>
+<p>で求められる。イニシャルもわかっている場合は、その文字から始まる候補だけで分母を計算し直す。記録上の性別を指定する場合も、その区分の掲載件数を使う。いずれも、条件に一致する候補がある場合の計算である。</p>
+<h3 id="section-12">名前を均等に選んだときの平均候補数</h3>
+<p>本文の平均候補数は、「数字の組み合わせを均等に選ぶ平均」ではない。「正解となる名前の種類を均等に選び、その名前と同じ条件に属する候補数を数える平均」だ。</p>
+<p>同じ結果になる名前を集めたグループの大きさをn₁、n₂、…、総候補数をNとすると、</p>
+<div class="math">
+\[
+\text{平均候補数}=\frac{1}{N}\sum_g n_g^2
+\]</div>
+<p>になる。大きさn_gのグループは、正解を選ぶときにもn_g回登場するためだ。</p>
+<h3 id="section-13">残った不確かさを測る</h3>
+<p>候補数のほかに、どれくらい不確かさが残るかを測る「エントロピー」も計算した。</p>
+<p>名前xの確率をp(x)とすると、</p>
+<div class="math">
+\[
+H(X)=-\sum_x p(x)\log_2 p(x)
+\]</div>
+<p>と定義する。均等な候補がN個なら、H(X)＝log₂Nになる。たとえば8個なら3bit、16個なら4bitだ。</p>
+<p>数字を見たあとに残る不確かさがH(X｜Z)。イニシャルIも知ったあとの不確かさがH(X｜Z,I)となる。</p>
+<p>日本語33,837種類を均等に扱う場合と、米国29,225種類を掲載人数で重みづけする場合を、それぞれ計算すると、</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>条件</th>
+<th style="text-align: right;">米国・掲載人数で重みづけ</th>
+<th style="text-align: right;">日本語・読みの種類を均等</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>情報なし：H(X)</td>
+<td style="text-align: right;">11.64bit</td>
+<td style="text-align: right;">15.05bit</td>
+</tr>
+<tr>
+<td>数字を知る：H(X｜Z)</td>
+<td style="text-align: right;">4.96bit</td>
+<td style="text-align: right;">8.03bit</td>
+</tr>
+<tr>
+<td>数字とイニシャルを知る：H(X｜Z,I)</td>
+<td style="text-align: right;">1.72bit</td>
+<td style="text-align: right;">4.23bit</td>
+</tr>
+</tbody>
+</table></div>
+<p>となった。どちらも11・22・33を残す方式で、性別は条件に含めていない。日本語の均等評価では、数字によって約7.02bit、そこにイニシャルを足すことでさらに約3.80bitの不確かさが減っている。</p>
+<p>二つの列は、読みと綴り、均等と人数加重という異なる設定なので、言語そのものの当てやすさの優劣には使わない。米国の平均候補数を人数で重みづけする場合も、上の均等平均の式とは区別し、各名前の掲載人数を重みにして計算する。</p>
+<p>ただし、この値だけで「何回答えれば当たるか」や「1位の正答率」は決まらない。候補の数、確率の偏り、上位何件までを見るかを、それぞれ区別して調べる必要がある。</p>
+<span class="anchor" id="appendix-2"></span>
+<h2 id="section-14">付録2：全組み合わせ表</h2>
+<p><a href="appendix-2/">数字の組み合わせと、対応する候補数・掲載人数を見る</a></p>
+<p>11・22・33を残す方式の216組と、必ず一桁まで還元する方式の99組は、別ページにまとめた。米国の候補数・掲載人数と、日本語の全候補数・優先候補数を、0件の組も含めて確認できる。</p>
+<span class="anchor" id="data-and-calculation"></span>
+<h2 id="section-15">データと計算について</h2>
+<p>名前の元データは、2026年10月15日に確認した固定データを使っている。米国の性別条件は、同じ原本の男女別件数を用いて20日に追加集計した。日本語の優先候補は23日に選別資料を見直し、本文・付録とも公開版の8,244種類に合わせた。</p>
+<p>日本語の集計は、長音の母音を残す従来の表記方式で統一している。20日に追加したパスポート型との比較・両表記検索は、ツールで試せる別の条件として扱う。辞書・表記方式・選別方法を変えれば、候補数や最大値も変わりうる。</p>
+<h3 id="section-16">馴染みのある米国の名前も探してみた</h3>
+<p>Adam、Alex、Tom、John。自分にも馴染みのある名前は、このデータではどれくらい多いのだろう。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>名前</th>
+<th style="text-align: right;">掲載人数（男女合算）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Adam</td>
+<td style="text-align: right;">3,505</td>
+</tr>
+<tr>
+<td>Alex</td>
+<td style="text-align: right;">1,809</td>
+</tr>
+<tr>
+<td>Tom</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr>
+<td>John</td>
+<td style="text-align: right;">8,055</td>
+</tr>
+</tbody>
+</table></div>
+<p>Tomは46件だが、Thomasは6,581件。Alexは1,809件だが、Alexanderは7,527件だった。このリストは登録された綴りごとの集計なので、TomとThomas、AlexとAlexanderは別々に数えている。</p>
+<p>よく聞く名前を思い浮かべることと、ある年の出生データで多い綴りを探すことは、ぴったり同じではない。少なくとも、Tomが46件という数字だけから、Tomと呼ばれる人の少なさは判断できない。</p>
+<h3 id="section-17">表示と集計の補足</h3>
+<ul>
+<li><strong>最大25件の条件</strong>：本文第6章は、固定日本語辞書・従来の表記のみ・11／22／33を残す方式・イニシャル指定ありの場合。ページ分け前の表示対象全体の上限で、優先候補がない条件で元の辞書の候補に戻す場合も含む。イニシャル未指定、一桁まで還元する方式、パスポート型を含めた検索では25件を超える条件がある。</li>
+<li><strong>候補数と画面の表示</strong>：「組み合わせを見る」は元の辞書で一致する名前の種類数を示す。日本語の名前一覧では優先候補を先に見せるため、一覧の件数より少なく見えることがある。優先候補が0件なら元の辞書の候補を表示する。</li>
+<li><strong>両表記での検索</strong>：「パスポート型の表記も含める」は初期状態ではオフ。同じ読みは1候補として数え、結果には指定した数字・イニシャルに一致する表記だけを載せる。両方式とも一致すると、1候補の中に2行が表示される。</li>
+<li><strong>米国の性別条件と割合</strong>：初期状態は「指定なし」で男女合算。「男性」「女性」はSSAの記録区分で、指定時はその区分に掲載された名前を候補にし、その区分の件数で順位を付ける。両方に載る名前は両条件に残す。人数加重の分母は検索条件に一致する全候補の該当区分の掲載人数で、画面の1ページだけを100％とはしない。種類均等では、絞り込んだ各候補を同じ重みで扱う。付録1・2は性別未指定の集計。</li>
+<li><strong>母音または子音がない場合</strong>：該当する部分は「—」とし、0や9で埋めない。11・22・33を残す方式では、この別枠を含めて、固定日本語辞書で候補がある組は187通りとなる。</li>
+</ul>
+<h3 id="section-18">名前リストの収録範囲</h3>
+<p>優先候補は、別の名前リストにも載っている読みを選んだものだ。そのため、参照先に何が収録され、どう選ばれているかの影響を受ける。</p>
+<p>リストの外にも、名前はある。元の辞書も優先候補も、すべての名前を覆うリストではない。表示されなかったことだけで、その名前が存在しないとは判断できない。</p>
+<p><strong>公開版への更新（2026年10月23日）</strong>：研究途中では明治安田・たまひよ・ベビーカレンダーのランキングへの掲載も選別に参照したが、その情報の公開アプリでの再配布条件は未確認だったため、公開版の選別から外した。現在の優先候補は、下記のMITライセンスの名前リストとの照合だけで選んでいる。元の辞書33,837読みと計算規則は変更していない。</p>
+<h3 id="section-19">出典と計算規則</h3>
+<ul>
+<li><strong>日本語の元の辞書</strong>：<a href="https://www.edrdg.org/enamdict/enamdict_doc.html">JMnedict／ENAMDICT</a>。下の名前の読みを抽出し、氏名全体を除外。出現人数のデータではない。著作権者はJames William Breen／EDRDG。辞書由来のデータとローマ字変換データは<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>で提供する。<a href="https://www.edrdg.org/edrdg/licence.html">EDRDGのライセンス案内</a>も参照。</li>
+<li><strong>日本語の優先表示</strong>：<a href="https://github.com/shuheilocale/japanese-personal-name-dataset/tree/74d7bfd77ea0043d39a23f1188d0256182eb80b1">Japanese Personal Name Datasetの固定版</a>（MITライセンス、Copyright (c) 2022 shuheilocale）にある名のorg／opti版、男女各ファイルの読み列を使用。男女の読みを合わせて重複を除き、元の辞書と照合する。org／optiに載る8,244読みを優先候補とし、その中でもoptiに載る936読みを先に並べる。参照先のローマ字・漢字・性別列は、この優先判定には使用しない。optiは参照先のリスト作者による選別版で、本稿の著者による手選びでも、人気順や全国頻度の推計でもない。MITの選別資料と、CC BY-SA 4.0の辞書由来データは別々の利用条件で扱う。</li>
+<li><strong>米国の名前データ</strong>：SSAの2024年全国データに由来する公開複製。公式アーカイブを直接取得できなかったため、<a href="https://raw.githubusercontent.com/dxdc/babynames/ef1ad7133de7cf6ca496249d3ae4ede2770def8f/raw/yob2024.txt">dxdc/babynamesの固定版</a>を、<a href="https://raw.githubusercontent.com/vancleve/BIO540-DWV/310a00ee5672b7f6bd823d2f35c697e3df8ca43d/yob2024.txt">vancleve/BIO540-DWVの固定版</a>とバイト単位で照合して使用した。取得日は2026年10月15日、ファイルは <code>yob2024.txt</code>（407,010バイト）。SHA-256は <code>f0083af67c48b666e938d8bb7cb5ec766c832d08359fbdae0edf963dbd9613fb</code>。現在の公式配布ファイルとの完全一致を確認したものではない。<a href="https://www.ssa.gov/oact/babynames/background.html">SSAのデータ説明</a>と<a href="https://www.ssa.gov/oact/babynames/limits.html">公開範囲</a>も参照。少数の名前は公表対象外で、元資料には未修正の入力や表記上の癖もありうる。</li>
+<li><strong>マスターナンバーの説明</strong>：<a href="https://www.numerology.com/articles/about-numerology/master-numbers/">Numerology.comの解説</a>を参照した。数秘術内での解釈の紹介であり、その効力を実験で検証したという意味ではない。</li>
+<li><strong>表記と母音</strong>：日本語はプログラム所定の読み・ローマ字変換を使用。長音などの表記が変われば結果も変わりうる。母音はAEIOU、Yは子音。該当する文字がない部分は「—」。別サイトで計算した結果を入力する場合は、これらの規則を揃える必要がある。</li>
+<li><strong>ローマ字表記の参照資料</strong>：<a href="https://www.ezairyu.mofa.go.jp/passport/hebon.html">外務省「ヘボン式ローマ字綴方表」</a>、<a href="https://www.bunka.go.jp/seisaku/kokugo_nihongo/kokugo_shisaku/pdf/94340701_01.pdf">文化庁「ローマ字のつづり方」に関するQ&amp;A</a>（令和8年2月、問21・22・25等）。2026年10月19日確認。これらは表記の用途差を説明するための資料であり、今回の既存変換が各規則に完全準拠しているという主張ではない。</li>
+<li><strong>パスポート型の範囲</strong>：旅券の基本規則を参考にした仮名からの近似変換。長音だけでなく撥音・促音等の扱いも異なり、発音や語の区切りを完全に判定するものではない。対応できない読みもある。その場合も元の辞書から読みを削らず、従来の表記で検索できる。</li>
+<li><strong>数秘術での表記の用例</strong>：<a href="https://tsuduri-illust.com/numerotekeisan">マンガ数秘らぼの計算方法</a>は「さとう→SATO」、<a href="https://esprit-delasse.com/numerology/">Esprit Delasseの計算ツールの説明</a>は「さとう→SATOU」としている。2026年10月20日確認。両方の用例を確認したもので、各方式の普及率を調査したものではない。</li>
+<li><strong>自分の名前についての追加確認</strong>：2026年10月19日、著者が固定辞書への読みの収録と、普段のローマ字との計算結果の相違を確認。20日には、改めて検索して自分の名前を見つけた。当初の画面条件を完全に再現したものではない。第7章の「こうた」は仕組みの説明例であり、著者の名前を示すものではない。</li>
+<li><strong>評価の範囲</strong>：既知の辞書と頻度分布の内部での集計。未知の人、別の年代、未収録の名前に対する予測成績ではない。日本語は読み、米国側は綴りを単位にしており、データの集め方も違うため、両者を言語そのものの「当てやすさ」の比較とはしない。</li>
+</ul>
+<p>本稿で検証しているのは、名前を数字に変える計算が、元の名前についてどれだけ情報を残すかである。数秘術の性格診断や将来予測の妥当性は、今回の実験の対象に含めていない。</p>
+            </div>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <span>© baseka</span>
+            <div class="footer-links">
+                <a href="https://x.com/BaseBaseka" target="_blank" rel="noopener noreferrer">X</a>
+                <a href="https://soundcloud.com/user-900569136" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

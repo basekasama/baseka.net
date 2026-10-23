@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>なまえの数秘 / Name Numerology</title>
+  <meta name="description" content="名前から数秘術の三つの数字を計算し、数字から日本語・米国の名前候補を探せるブラウザーツール。">
+  <link rel="canonical" href="https://baseka.net/software/name-numerology/">
+  <meta property="og:title" content="なまえの数秘 / Name Numerology | baseka.net">
+  <meta property="og:description" content="Calculate three numerology numbers from a name, or search name candidates from the numbers.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://baseka.net/software/name-numerology/">
+  <meta property="og:image" content="https://baseka.net/assets/baseka-icon.jpg">
+  <link rel="icon" href="/assets/favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css?v=priority-mit-20261023.1">
+  <script defer src="data.js?v=priority-mit-20261023.1"></script>
+  <script defer src="core.js?v=priority-mit-20261023.1"></script>
+  <script defer src="passport.js?v=priority-mit-20261023.1"></script>
+  <script defer src="app.js?v=priority-mit-20261023.1"></script>
+  <script defer src="comparison-app.js?v=priority-mit-20261023.1"></script>
+  <script defer src="inverse-content.js?v=priority-mit-20261023.1"></script>
+  <script defer src="inverse-lookup.js?v=priority-mit-20261023.1"></script>
+  <script defer src="inverse-data.js?v=priority-mit-20261023.1"></script>
+  <script defer src="inverse-priority.js?v=priority-mit-20261023.1"></script>
+  <script defer src="romaji-data.js?v=priority-mit-20261023.1"></script>
+  <script defer src="us-sex-data.js?v=priority-mit-20261023.1"></script>
+  <script defer src="priority-lookup.js?v=priority-mit-20261023.1"></script>
+  <script defer src="inverse-app.js?v=priority-mit-20261023.1"></script>
+  <script defer src="tool-switcher.js?v=priority-mit-20261023.1"></script>
+</head>
+<body>
+  <header class="site-bar">
+    <div class="site-bar-inner">
+      <a class="site-logo" href="/">baseka.net</a>
+      <nav class="site-links" aria-label="Site">
+        <a href="/software/">Software</a>
+        <a href="/experiments/numerology-in-reverse/">Article</a>
+        <a href="/ja/experiments/numerology-in-reverse/">日本語記事</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">NAME / NUMEROLOGY</p>
+        <h1 data-text="headline"></h1>
+        <p class="muted" data-text="subtitle"></p>
+      </div>
+      <button type="button" id="language" class="secondary language" data-text="language"></button>
+    </header>
+    <nav class="tool-nav" aria-label="Tools">
+      <a class="tool-choice" href="#forward-tool" data-tool-choice="forward-tool">
+        <span class="tool-choice-number">01</span>
+        <strong data-inverse-text="forwardTab"></strong>
+        <span class="tool-choice-copy tool-copy-ja">名前を入力して、E・S・Pの三つの数字を計算します。</span>
+        <span class="tool-choice-copy tool-copy-en">Enter a name and calculate its E, S, and P numbers.</span>
+      </a>
+      <a class="tool-choice" href="#inverse-tool" data-tool-choice="inverse-tool">
+        <span class="tool-choice-number">02</span>
+        <strong data-inverse-text="inverseTab"></strong>
+        <span class="tool-choice-copy tool-copy-ja">三つの数字から、日本語・米国の名前候補を探します。</span>
+        <span class="tool-choice-copy tool-copy-en">Search Japanese and U.S. name candidates from three numbers.</span>
+      </a>
+    </nav>
+    <section id="forward-tool" class="tool-view" aria-labelledby="forward-title">
+    <form id="name-form" class="input-panel" novalidate autocomplete="off">
+      <h2 id="forward-title" data-text="step"></h2>
+      <p class="muted input-hint" data-text="inputHint"></p>
+      <div class="input-grid">
+        <div>
+          <label for="name" data-text="nameLabel"></label>
+          <input id="name" type="text" maxlength="80" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="name-hint">
+          <p id="name-hint" class="field-hint" data-text="exampleHint"></p>
+        </div>
+        <div>
+          <label for="roman" data-text="romanLabel"></label>
+          <input id="roman" type="text" maxlength="240" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="roman-hint">
+          <p id="roman-hint" class="field-hint" data-text="romanHint"></p>
+        </div>
+      </div>
+      <div class="actions">
+        <button type="submit" id="calculate" data-text="calculate"></button>
+        <button type="button" id="example" class="secondary" data-text="example"></button>
+      </div>
+      <label class="checkbox-label"><input type="checkbox" id="compare-passport"><span data-text="passportCompare"></span></label>
+      <div id="comparison" class="comparison preserve-lines" role="status" aria-live="polite" hidden></div>
+      <p id="status" class="status" role="status" aria-live="polite" hidden></p>
+    </form>
+    <section id="empty" class="empty">
+      <h2 data-text="emptyHeading"></h2>
+      <p class="muted preserve-lines" data-text="emptyBody"></p>
+    </section>
+    <section id="results" aria-labelledby="result-title" hidden>
+      <h2 id="result-title" aria-live="polite"></h2>
+      <p class="result-hint muted" data-text="resultHint"></p>
+      <div id="cards" class="cards"></div>
+    </section>
+    <footer class="tool-notes">
+      <details>
+        <summary data-text="rulesTitle"></summary>
+        <p class="rules preserve-lines" data-text="rules"></p>
+      </details>
+      <p class="privacy" data-text="privacy"></p>
+    </footer>
+    </section>
+    <section id="inverse-tool" class="inverse-tool tool-view" aria-labelledby="inverse-title">
+      <p class="eyebrow">INVERSE / LOOKUP</p>
+      <h2 id="inverse-title" data-inverse-text="title"></h2>
+      <p class="muted input-hint" data-inverse-text="intro"></p>
+      <form id="inverse-form" class="input-panel" novalidate autocomplete="off">
+        <div class="inverse-grid">
+          <div><label for="inverse-dataset" data-inverse-text="dataset"></label><select id="inverse-dataset"></select></div>
+          <div><label for="inverse-rule" data-inverse-text="rule"></label><select id="inverse-rule"></select></div>
+          <div><label for="inverse-weight" data-inverse-text="weight"></label><select id="inverse-weight" aria-describedby="inverse-scope"></select></div>
+        </div>
+        <div id="inverse-passport-panel"><label class="checkbox-label"><input type="checkbox" id="inverse-passport"><span data-inverse-text="passportInclude"></span></label><p id="inverse-passport-note" class="field-hint" data-inverse-text="passportUnionHint" hidden></p></div>
+        <p id="inverse-scope" class="field-hint"></p>
+        <div class="inverse-grid numbers-grid">
+          <div><label for="inverse-e" data-inverse-text="e"></label><select id="inverse-e"></select></div>
+          <div><label for="inverse-s" data-inverse-text="s"></label><select id="inverse-s"></select></div>
+          <div><label for="inverse-p" data-inverse-text="p"></label><select id="inverse-p"></select></div>
+        </div>
+        <p class="field-hint" data-inverse-text="absentHint"></p>
+        <div id="inverse-sex-panel" class="sex-field" hidden><label for="inverse-sex" data-inverse-text="recordedSexLabel"></label><select id="inverse-sex" aria-describedby="inverse-sex-hint"></select><p id="inverse-sex-hint" class="field-hint" data-inverse-text="recordedSexHint"></p></div>
+        <div class="initial-field"><label for="inverse-initial" data-inverse-text="initialLabel"></label><input id="inverse-initial" type="text" autocomplete="off" spellcheck="false" autocapitalize="characters" aria-describedby="inverse-initial-hint"><p id="inverse-initial-hint" class="field-hint" data-inverse-text="initialHint"></p></div>
+        <div class="actions">
+          <button id="inverse-search" type="submit" data-inverse-text="search"></button>
+          <button id="inverse-sample" type="button" class="secondary"></button>
+          <button id="inverse-reset" type="button" class="secondary" data-inverse-text="reset"></button>
+        </div>
+      </form>
+      <p id="inverse-status" class="inverse-status" role="status" aria-live="polite"></p>
+      <button id="inverse-browse" type="button" class="secondary" data-inverse-text="browse" aria-expanded="false" aria-controls="inverse-explorer"></button>
+      <section id="inverse-explorer" class="explorer" aria-labelledby="inverse-browse-title" hidden>
+        <div class="explorer-header"><h3 id="inverse-browse-title" tabindex="-1" data-inverse-text="browseTitle"></h3><button id="inverse-browse-close" type="button" class="secondary" data-inverse-text="browseClose"></button></div>
+        <p class="field-hint" data-inverse-text="browseIntro"></p>
+        <p id="inverse-browse-scope" class="browse-scope"></p>
+        <div class="explorer-filter">
+          <div><label for="inverse-fix" data-inverse-text="fixNumber"></label><select id="inverse-fix"></select></div>
+          <div id="inverse-value-field" hidden><label for="inverse-fixed-value" data-inverse-text="fixedValue"></label><select id="inverse-fixed-value"></select></div>
+        </div>
+        <p id="inverse-browse-status" role="status" aria-live="polite"></p>
+        <button id="inverse-clear-initial" type="button" class="secondary" data-inverse-text="clearInitial" hidden></button>
+        <div id="inverse-browse-list">
+          <p class="field-hint" data-inverse-text="browseCountNote"></p>
+          <table class="combination-table"><thead><tr><th scope="col">E</th><th scope="col">S</th><th scope="col">P</th><th scope="col" data-inverse-text="allCount"></th><th scope="col"><span class="visually-hidden" data-inverse-text="viewNames"></span></th></tr></thead><tbody id="inverse-combinations"></tbody></table>
+          <nav class="pagination"><button id="inverse-browse-previous" type="button" class="secondary" data-inverse-text="previous"></button><span id="inverse-browse-page" role="status" aria-live="polite"></span><button id="inverse-browse-next" type="button" class="secondary" data-inverse-text="next"></button></nav>
+        </div>
+      </section>
+      <section id="inverse-results" aria-labelledby="inverse-summary" hidden>
+        <h3 id="inverse-summary" tabindex="-1"></h3>
+        <p id="inverse-total" class="muted"></p>
+        <p id="inverse-share-note" class="field-hint"></p>
+        <p id="inverse-denominator" class="field-hint" data-inverse-text="denominator"></p>
+        <div id="inverse-views" class="actions"><button id="inverse-preferred" type="button" class="secondary"></button><button id="inverse-other" type="button" class="secondary"></button><button id="inverse-all" type="button" class="secondary"></button></div>
+        <h4 id="inverse-view-title"></h4>
+        <p id="inverse-matching-spellings-note" class="field-hint" data-inverse-text="matchingSpellingsNote" hidden></p>
+        <table class="candidate-table">
+          <thead><tr><th id="inverse-name-heading" scope="col"></th><th scope="col" data-inverse-text="roman"></th><th id="inverse-count-heading" scope="col" data-inverse-text="count"></th><th id="inverse-share-heading" scope="col" data-inverse-text="share"></th></tr></thead>
+          <tbody id="inverse-rows"></tbody>
+        </table>
+        <nav class="pagination" aria-label="Candidate pages">
+          <button id="inverse-previous" type="button" class="secondary" data-inverse-text="previous"></button>
+          <span id="inverse-page" role="status" aria-live="polite"></span>
+          <button id="inverse-next" type="button" class="secondary" data-inverse-text="next"></button>
+        </nav>
+      </section>
+      <p class="inverse-limit muted" data-inverse-text="limit"></p>
+      <details class="inverse-sources">
+        <summary data-inverse-text="sources"></summary>
+        <p id="inverse-source-details"></p>
+        <p id="inverse-priority-details" data-inverse-text="priorityDetails"></p>
+        <p data-inverse-text="rules"></p>
+        <p data-inverse-text="credit"></p>
+        <div class="source-links">
+          <a href="https://www.edrdg.org/enamdict/enamdict_doc.html" target="_blank" rel="noopener noreferrer" data-inverse-text="dictionaryLink"></a>
+          <a href="https://www.edrdg.org/edrdg/licence.html" target="_blank" rel="noopener noreferrer" data-inverse-text="licenseLink"></a>
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" data-inverse-text="ccLink"></a>
+          <a href="https://www.ssa.gov/oact/babynames/background.html" target="_blank" rel="noopener noreferrer" data-inverse-text="ssaLink"></a>
+          <a href="data-notes.html" target="_blank" rel="noopener noreferrer" data-inverse-text="notesLink"></a>
+        </div>
+      </details>
+      <p class="privacy muted" data-inverse-text="privacy"></p>
+    </section>
+    <noscript>このページにはJavaScriptが必要です。 / Please enable JavaScript to use this tool.</noscript>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>© baseka</span>
+      <div>
+        <a href="https://x.com/BaseBaseka" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="https://soundcloud.com/user-900569136" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

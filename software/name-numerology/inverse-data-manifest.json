@@ -1,0 +1,76 @@
+{
+  "version": "inverse-client-mit-20261023.1",
+  "inputs": [
+    {
+      "language": "ja",
+      "path": "research/results/ja-refinement-20261015-verified/D/inverse-index.json",
+      "sha256": "639F7EDCF66CCDEC0054D0291E855F70FEDEFB9060AB30F6F3027B253FEA0E36",
+      "candidates": 33837,
+      "totalCount": 33837
+    },
+    {
+      "language": "en",
+      "path": "research/results/real-2026-10-15-verified/en/inverse-index.json",
+      "sha256": "A42D630D222AE4A5746B6F78EBF4AA7BCFBB006ACC6D926562355F8FE8F3164D",
+      "candidates": 29225,
+      "totalCount": 3328501
+    }
+  ],
+  "outputSha256": "07D990FAC5EA4CCBC16C66082ED30A847AEA9F8653BC4285350AA2C1DC8B7249",
+  "priority": {
+    "path": "shared/inverse-priority.json",
+    "sha256": "7E1BB825E66DE66B8102F7A14EB0536A34BA50999D59330A5B81C725B08547BF",
+    "version": "priority-mit-20261023.1",
+    "published": 0,
+    "publishedMeaning": "Empty compatibility field; nonempty values are rejected by the client.",
+    "selected": 936,
+    "broad": 9208,
+    "strong": 936,
+    "preferred": 8244,
+    "supplement": 7308,
+    "other": 25593,
+    "unmatchedBroad": 964,
+    "sourceCommit": "74d7bfd77ea0043d39a23f1188d0256182eb80b1",
+    "sourceInputs": [
+      {
+        "path": "research/data/mit-priority-74d7bfd/first_name_man_org.csv",
+        "sha256": "66DDFAC54862A23B12647FBFB230B956FA3421157D89339EBD1D55FEC5577C50",
+        "bytes": 526728,
+        "url": "https://raw.githubusercontent.com/shuheilocale/japanese-personal-name-dataset/74d7bfd77ea0043d39a23f1188d0256182eb80b1/japanese_personal_name_dataset/dataset/first_name_man_org.csv"
+      },
+      {
+        "path": "research/data/mit-priority-74d7bfd/first_name_woman_org.csv",
+        "sha256": "474015276FD028811489D0BF0F79DD1D62E2E4522E7639F9C45464BEC07D37EA",
+        "bytes": 350334,
+        "url": "https://raw.githubusercontent.com/shuheilocale/japanese-personal-name-dataset/74d7bfd77ea0043d39a23f1188d0256182eb80b1/japanese_personal_name_dataset/dataset/first_name_woman_org.csv"
+      },
+      {
+        "path": "research/data/mit-priority-74d7bfd/first_name_man_opti.csv",
+        "sha256": "1E09537C71F0DBD79AB762981AA7012705802A9916813F0F4A54F237235F6FC4",
+        "bytes": 234671,
+        "url": "https://raw.githubusercontent.com/shuheilocale/japanese-personal-name-dataset/74d7bfd77ea0043d39a23f1188d0256182eb80b1/japanese_personal_name_dataset/dataset/first_name_man_opti.csv"
+      },
+      {
+        "path": "research/data/mit-priority-74d7bfd/first_name_woman_opti.csv",
+        "sha256": "D3CC0B5D36B187802DA61972DBE3C1A90C2B1B96F6A162546CA912229B535429",
+        "bytes": 104215,
+        "url": "https://raw.githubusercontent.com/shuheilocale/japanese-personal-name-dataset/74d7bfd77ea0043d39a23f1188d0256182eb80b1/japanese_personal_name_dataset/dataset/first_name_woman_opti.csv"
+      },
+      {
+        "path": "research/data/mit-priority-74d7bfd/LICENSE",
+        "sha256": "B9A831DF0C685C5DCA6E8DA96CF1A3EDFD2695CDBB02B90DCC7310B00254C5E6",
+        "bytes": 1069,
+        "url": "https://raw.githubusercontent.com/shuheilocale/japanese-personal-name-dataset/74d7bfd77ea0043d39a23f1188d0256182eb80b1/LICENSE"
+      },
+      {
+        "path": "research/data/mit-priority-74d7bfd/README.md",
+        "sha256": "7E0D4E8293DC7A089FF76D7C20E666818FB6617B410876A0BD96570595A0411E",
+        "bytes": 5147,
+        "url": "https://raw.githubusercontent.com/shuheilocale/japanese-personal-name-dataset/74d7bfd77ea0043d39a23f1188d0256182eb80b1/README.md"
+      }
+    ],
+    "license": "MIT (reference lists only)",
+    "transformation": "Exact first-column readings; union male/female org and opti separately; deduplicate; H=D∩C; Q=D∩(C∪B). Source romanizations, kanji columns and source sex categories are not used."
+  },
+  "note": "Frozen D/US keys, counts, letters and buckets unchanged. Priority is MIT list membership, not popularity or population frequency. JMnedict-derived data retain CC BY-SA 4.0."
+}

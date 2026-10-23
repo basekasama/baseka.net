@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'"><title>逆引きデータの出典 / Inverse data sources</title><link rel="stylesheet" href="style.css?v=priority-mit-20261023.1"></head>
+<body><main><a href="index.html">ツールへ戻る / Back to tools</a>
+<h1>逆引きデータの出典・版 / Sources and versions</h1>
+<section class="input-panel"><h2>JMnedict · Japanese readings</h2>
+<p>© James William Breen / Electronic Dictionary Research and Development Group (EDRDG). <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. <a href="https://www.edrdg.org/enamdict/enamdict_doc.html">Dictionary documentation</a> · <a href="https://www.edrdg.org/edrdg/licence.html">EDRDG licence</a>.</p>
+<p>2026-10-15原本のD版：33,837種類の読み。NFKC、カタカナ→ひらがな、NFCによる表記統合、given/fem/mascの選択、full-nameタグ付きentryの採用根拠からの除外、既存Coreによる計算と索引化を行っています。未対応80読みと要確認7 entryは未修正。人口頻度はありません。</p>
+<p>D refinement of the 2026-10-15 snapshot: 33,837 readings. Modified by width/kana normalization, selection of given-name entries, exclusion of full-name entries as support, and calculation/indexing. 80 unsupported readings and 7 entries under review remain limitations. There are no population frequencies.</p>
+<p class="letters">Original SHA-256: 71E99DBDD48693078DD33E6D83661B994B3DCF82D88E8D714F9C47BE43706487<br>Retrieved: 2026-10-15T03:35:56.6441435+00:00<br>Source: https://www.edrdg.org/pub/Nihongo/JMnedict.xml.gz</p></section>
+<section class="input-panel"><h2>SSA 2024 · US published names</h2>
+<p>Source: U.S. Social Security Administration. <a href="https://www.ssa.gov/oact/babynames/background.html">Data background</a>. 29,225 spellings; 3,328,501 published counts. Rows for both sexes are combined by spelling.</p>
+<p>保存された2公開コピーのyob2024.txt全体のSHA-256は一致。公式現行版との一致は未確認です。希少な非公表名・現在の人口分布・将来の予測精度を表すものではありません。SSA統計の権利と公開コピーのリポジトリのライセンスは区別します。</p>
+<p>The two saved public copies of the complete yob2024.txt file have identical hashes. Agreement with the current official release is unverified. These counts do not cover unpublished rare names or represent the current population or future predictive accuracy.</p>
+<p class="letters">SHA-256: F0083AF67C48B666E938D8BB7CB5EC766C832D08359FBDAE0EDF963DBD9613FB<br>Retrieved: 2026-10-15T03:37:23.7934088+00:00</p>
+<p><a href="https://raw.githubusercontent.com/dxdc/babynames/ef1ad7133de7cf6ca496249d3ae4ede2770def8f/raw/yob2024.txt">Primary copy · pinned commit ef1ad7133de7cf6ca496249d3ae4ede2770def8f</a></p>
+<p><a href="https://raw.githubusercontent.com/vancleve/BIO540-DWV/310a00ee5672b7f6bd823d2f35c697e3df8ca43d/yob2024.txt">Cross-check copy · pinned commit 310a00ee5672b7f6bd823d2f35c697e3df8ca43d</a></p></section>
+<section class="input-panel"><h2>固定データ / Frozen data</h2><p>新しい取得や再抽出は行わず、現行Aの確定済み研究索引の全候補・人数・R0/R33の対応をそのまま使用しています。保存計算文字列の先頭A–Zで任意に絞り込めます。日本語の各行には割合を表示せず、米国の割合は数字とイニシャルに一致する全候補が分母です。</p><p>Complete saved indexes are used without candidate changes or new extraction. Optional initials use the first saved calculation letter. Japanese rows show no probabilities. US shares are conditional on the complete numerology-and-initial matching set.</p><p><a href="inverse-data-manifest.json">Input versions and SHA-256 manifest</a></p></section>
+<section class="input-panel"><h2>優先候補 / Reference-based priority</h2>
+<p>MIT名前リストの読み列のみを使用します。全件版Bは9,208読み、作者の判断による選抜版Cは936読みで、C⊆Bを確認しています。固定辞書Dと一致するQ=D∩(C∪B)の8,244読みを優先し、H=D∩Cの936読みを先に表示します。人気順・人口頻度ではありません。</p>
+<p>Priority uses only first-column readings from the MIT lists. B has 9,208 readings; the author's selected C has 936, with C⊆B. Q=D∩(C∪B) contains 8,244 preferred readings, of which H=D∩C contains 936 shown first. These are reference memberships, not population frequencies or popularity ranks. All 33,837 D readings remain searchable.</p>
+<p><a href="https://github.com/shuheilocale/japanese-personal-name-dataset/tree/74d7bfd77ea0043d39a23f1188d0256182eb80b1">shuheilocale/japanese-personal-name-dataset, fixed commit 74d7bfd77ea0043d39a23f1188d0256182eb80b1</a> · MIT · © 2022 shuheilocale. Exact first-column readings from first_name_man/woman_org/opti.csv, combined and deduplicated. Source romanizations, kanji and sex categories are not used. The author's opti selection is subjective. The underlying JMnedict-derived dictionary remains CC BY-SA 4.0.</p>
+<p><a href="PRIORITY-NOTICES.md">出典・MIT許諾文 / Full third-party notices</a> · <a href="inverse-data-manifest.json">入力ハッシュ・加工内容 / Input hashes and transformations</a></p>
+<p>Priority/search version: priority-mit-20261023.1</p></section>
+<section class="input-panel"><h2>追加表記B / Passport-inspired comparison</h2>
+<p>規則 passport-kana-20261020.1。<a href="https://www.ezairyu.mofa.go.jp/passport/hebon.html">外務省のヘボン式表</a>を参考に、元の仮名列から追加表記を生成。こうた→KOTA、ゆうき→YUKI、撥音・外来音等も含む近似です。本人の旅券綴りを保証しません。明示的な区切りを越えて長音を縮めず、無印の発音上の区切りは推定しません。</p>
+<p>D全33,837読みを保持し、Bを生成できた33,740読みだけに追加表記とR0/R33を持ちます。曖昧83・未対応14はAで検索可能。両方式では同一方式の数字と頭文字を照合してから読みキーで重複排除。異なる読みは同じB表記でも別候補。初期値はAのみ。人口確率・方式の利用率は仮定しません。今回の派生データもJMnedict由来のCC BY-SA 4.0です。</p>
+<p>Version passport-kana-20261020.1 adds a deterministic kana approximation, without replacing A. B is generated for 33,740 of the unchanged 33,837 readings. The remaining 97 retain A. Match numbers and initial within each mode, then union by reading key before priority and paging. Distinct readings remain distinct. This derivative data is also CC BY-SA 4.0. Default: A only.</p>
+</section>
+</main></body></html>

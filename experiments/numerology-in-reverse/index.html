@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-211JBWZPSH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-211JBWZPSH');
+    </script>
+
+    <title>Numerology in Reverse: Can Three Numbers Reveal Your Name? | baseka.net</title>
+    <meta name="description" content="Can three numerology numbers reveal a name? An experiment using U.S. and Japanese name data, inverse lookup, and information theory.">
+    <link rel="canonical" href="https://baseka.net/experiments/numerology-in-reverse/">
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+
+    <meta property="og:title" content="Numerology in Reverse: Can Three Numbers Reveal Your Name? | baseka.net">
+    <meta property="og:description" content="Can three numerology numbers reveal a name? An experiment using U.S. and Japanese name data, inverse lookup, and information theory.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://baseka.net/experiments/numerology-in-reverse/">
+    <meta property="og:image" content="https://baseka.net/assets/baseka-icon.jpg">
+
+    <link rel="alternate" hreflang="en" href="https://baseka.net/experiments/numerology-in-reverse/">
+    <link rel="alternate" hreflang="ja" href="https://baseka.net/ja/experiments/numerology-in-reverse/">
+
+    <script>
+      MathJax = {
+        tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+        options: { enableMenu: false }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body class="article-page">
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="site-logo" href="/">baseka.net</a>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="/">Home</a>
+                <a href="/#works">Works</a>
+                <a href="/#experiments">Experiments</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <header class="article-hero">
+                <div class="wrap article-width">
+                    <div class="eyebrow-row">
+                        <p class="eyebrow">experiment / numerology in reverse</p>
+                        <a class="language-link" href="/ja/experiments/numerology-in-reverse/">日本語</a>
+                    </div>
+                    <h1>Numerology in Reverse: Can Three Numbers Reveal Your Name?</h1>
+                    <p class="subtitle">An experiment with U.S. and Japanese names, looking for the clues left in the numbers</p>
+                </div>
+            </header>
+
+            <div class="wrap article-width article-body">
+<p>In numerology, you can turn a name into numbers and use them for a reading.</p>
+<p>But can you go back from those numbers to the name?</p>
+<p>Take <strong>9 · 22 · 5</strong>.</p>
+<p>In the U.S. name data for births in 2024 that I examined, 13 distinct names produced these three numbers. Yet a single name, Theodore, accounted for about 98.3% of the people listed under those matching names.</p>
+<p>I haven't asked for a name. Just the calculation results.</p>
+<p>“Theodore, by any chance?”</p>
+<p>For someone drawn from the population represented by the data, some combinations make that a remarkably strong guess.</p>
+<p>Meanwhile, the Japanese names Mayu and Ayumi both give <strong>6 · 4 · 11</strong>. Those three numbers cannot tell the two apart. An initial, M or A, can.</p>
+<p>The calculation is the same. What changes is how the names gather around its results.</p>
+<p>For this experiment, I set aside numerology's interpretations and asked: <strong>given the calculation rules and the results, how far can we narrow down the original name?</strong> I also built a tool for exploring the candidates.</p>
+<p>We'll start with U.S. names and the difference between counting names and counting people. Then we'll look at Japanese names, initials, and the difficulty of building a useful name list. Finally, we'll find out why the three numbers cannot be chosen freely in the first place.</p>
+<p>You can jump to whichever part interests you:</p>
+<p><a href="#us-results">U.S. results</a> · <a href="#japanese-results">Japanese results</a> · <a href="#number-constraints">Why the numbers are constrained</a> · <a href="appendix-2/">Appendix 2: full combination tables, on a separate page</a></p>
+<h2 id="turning-a-name-into-numbers">1. Turning a name into numbers</h2>
+<p>Numerology has various conventions. Here, I'll leave its history and interpretations aside and use only the calculation that adds up the letters of a name.</p>
+<p>The target is a <strong>given name</strong>, not a full name including a surname. For the U.S. data, I use the alphabetic spellings in the published records. For Japanese names, I convert their readings into Roman letters.</p>
+<p>The letter values follow what is called the Pythagorean system.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Letters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>A · J · S</td>
+</tr>
+<tr>
+<td>2</td>
+<td>B · K · T</td>
+</tr>
+<tr>
+<td>3</td>
+<td>C · L · U</td>
+</tr>
+<tr>
+<td>4</td>
+<td>D · M · V</td>
+</tr>
+<tr>
+<td>5</td>
+<td>E · N · W</td>
+</tr>
+<tr>
+<td>6</td>
+<td>F · O · X</td>
+</tr>
+<tr>
+<td>7</td>
+<td>G · P · Y</td>
+</tr>
+<tr>
+<td>8</td>
+<td>H · Q · Z</td>
+</tr>
+<tr>
+<td>9</td>
+<td>I · R</td>
+</tr>
+</tbody>
+</table></div>
+<p>It's simply 1 through 9, repeated along the alphabet.</p>
+<p>From one name, we make three sums:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Letters included</th>
+<th>Name of the number</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E</td>
+<td>All letters</td>
+<td>Expression</td>
+</tr>
+<tr>
+<td>S</td>
+<td>Vowels only</td>
+<td>Soul Urge</td>
+</tr>
+<tr>
+<td>P</td>
+<td>Consonants only</td>
+<td>Personality</td>
+</tr>
+</tbody>
+</table></div>
+<p>In this experiment, A, E, I, O, and U are vowels. Y is a consonant.</p>
+<p>When a sum is large, we make it smaller by adding its digits. For example, 15 becomes 1 + 5 = 6.</p>
+<p>For the examples in the main article, however, <strong>we stop if we reach 11, 22, or 33</strong>. These are called master numbers; some numerology interpretations associate them with exceptional potential and the challenges that accompany it. Here, what matters is the rule that the calculation stops at those values.</p>
+<p>We add all the letter values first, then start adding digits. We don't reduce the running total after each letter.</p>
+<p>For THEODORE, the name from the opening example, the calculation is:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Letters included</th>
+<th>Addition</th>
+<th>Sum → result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All letters: THEODORE</td>
+<td>2 + 8 + 5 + 6 + 4 + 6 + 9 + 5</td>
+<td>45 → 9</td>
+</tr>
+<tr>
+<td>Vowels: EOOE</td>
+<td>5 + 6 + 6 + 5</td>
+<td>22 → 22</td>
+</tr>
+<tr>
+<td>Consonants: THDR</td>
+<td>2 + 8 + 4 + 9</td>
+<td>23 → 5</td>
+</tr>
+</tbody>
+</table></div>
+<p>That gives <strong>9 · 22 · 5</strong>, in E, S, P order.</p>
+<h2 id="to-work-backwards-calculate-everything-first">2. To work backwards, calculate everything first</h2>
+<p>A name may determine its numbers, but several names might lead to the same result. So before trying to pick one answer, I decided to find all the candidates.</p>
+<p>Collect real names, calculate E, S, and P for each, and put names with the same results into the same box.</p>
+<p>When someone enters “9 · 22 · 5,” open that box. If we also know their initial, keep only the names that begin with that letter.</p>
+<p>That's the whole mechanism. It looks for matches in its name list rather than generating unknown names.</p>
+<p>And that gives us our first important limitation:</p>
+<p><strong>A name that isn't on the list will never appear, however correctly we calculate its numbers.</strong></p>
+<p>Working backwards and knowing the name in the first place are separate problems.</p>
+<div class="tool-cta">
+    <p class="tool-cta-label">TRY THE TOOLS</p>
+    <p>Calculate three numbers from a name, or work backwards from the numbers to name candidates.</p>
+    <div class="tool-cta-links">
+        <a href="/software/name-numerology/#forward-tool">Name → Three numbers</a>
+        <a href="/software/name-numerology/#inverse-tool">Three numbers → Name candidates</a>
+    </div>
+</div>
+<span class="anchor" id="us-results"></span>
+<h2 id="u.s.names-13-candidates-doesnt-mean-a-one-in-13-chance">3. U.S. names: 13 candidates doesn't mean a one-in-13 chance</h2>
+<p>Let's begin with the U.S. data, where we have counts for each name.</p>
+<p>I used a public copy of national name data for births in 2024, originating from the Social Security Administration (SSA). Combining the male and female counts for each spelling gives 29,225 distinct spellings and a total listed count of 3,328,501.</p>
+<p>The names are included regardless of their linguistic origin: these are alphabetic given-name spellings appearing in the U.S. records.</p>
+<p>Of these, 13 names produce 9 · 22 · 5. If each distinct name gets equal weight, each candidate has a one-in-13 chance, or about 7.7%.</p>
+<p>Count the people listed under those names, though, and the picture changes.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align: right;">Listed count matching this combination</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Theodore</td>
+<td style="text-align: right;">12,024</td>
+</tr>
+<tr>
+<td>The other 12 names combined</td>
+<td style="text-align: right;">205</td>
+</tr>
+<tr>
+<td>Total</td>
+<td style="text-align: right;">12,229</td>
+</tr>
+</tbody>
+</table></div>
+<p>Theodore's share is:</p>
+<div class="math">
+\[
+\frac{12,024}{12,229}\approx 98.3\%
+\]</div>
+<p><strong>There are 13 candidate names, but about 98% of the matching people in the data share just one of them.</strong></p>
+<p>Theodore was <a href="https://www.ssa.gov/blog/en/posts/2025-05-09.html">the fourth most popular boy's name nationwide that year</a>. A name that was already common became overwhelmingly dominant among names with this particular numerical result.</p>
+<p>Are we choosing a name, or choosing a person? That alone makes a big difference to how likely a guess is to be right.</p>
+<p>But are all the boxes this helpful? Let's try the whole dataset.</p>
+<p>For each box defined by the available clues, we answer with the name that has the highest listed count. Add those winning counts across all boxes, then divide by the total listed count: that gives the “top candidate” rate in the table below. For the top 10, we select up to 10 names with the largest counts in each box and tally them in the same way.</p>
+<p>In the final row, we assume that we also know the sex recorded in the source data, as well as the initial.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Information available</th>
+<th style="text-align: right;">Top candidate is correct</th>
+<th style="text-align: right;">Correct name is in the top 10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No additional clues</td>
+<td style="text-align: right;">0.67%</td>
+<td style="text-align: right;">4.45%</td>
+</tr>
+<tr>
+<td>Initial only</td>
+<td style="text-align: right;">7.29%</td>
+<td style="text-align: right;">33.94%</td>
+</tr>
+<tr>
+<td>Three numbers only</td>
+<td style="text-align: right;">22.74%</td>
+<td style="text-align: right;">66.19%</td>
+</tr>
+<tr>
+<td>Three numbers + initial</td>
+<td style="text-align: right;">64.33%</td>
+<td style="text-align: right;">96.10%</td>
+</tr>
+<tr>
+<td>Three numbers + initial + recorded sex</td>
+<td style="text-align: right;">72.48%</td>
+<td style="text-align: right;">98.02%</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>Using the rule that preserves 11, 22, and 33. Sex is unspecified in the first four rows. Candidates are ranked using counts from this same dataset, and those counts also supply the weights for the evaluation.</em></p>
+<p>Even without the numbers or an initial, we can guess names in order of popularity. Compared with that starting point, the numbers and initial are clearly useful.</p>
+<p>Adding recorded sex raises the top-candidate success rate by about 8 percentage points. A spelling listed under both male and female records remains a candidate under either condition, ranked using the count for the selected category.</p>
+<p>The 96.10% and 98.02% figures describe how often the correct name falls within the top 10 when we select a person from this dataset and use the corresponding clues. They don't tell us how well this would work for another generation or for names missing from the data.</p>
+<p>So far, the numbers have gathered the candidates, and the counts have decided which names to guess first. How far can we get with a list that has no counts? Let's turn to Japanese names.</p>
+<span class="anchor" id="japanese-results"></span>
+<h2 id="japanese-names-mayu-and-ayumi-give-the-same-numbers">4. Japanese names: MAYU and AYUMI give the same numbers</h2>
+<p>For Japanese names, the calculation uses a reading written in Roman letters, rather than the shapes or stroke counts of the kanji characters.</p>
+<p>The program uses a convention based on Hepburn romanization, retaining the vowel letters used to represent long vowels. For example, ゆうき becomes YUUKI, ゆき becomes YUKI, and しおり becomes SHIORI. All Japanese results below use this convention.</p>
+<p>Mayu (まゆ) becomes MAYU, and Ayumi (あゆみ) becomes AYUMI. Let's add a name whose spelling looks rather different: Nodoka (のどか), or NODOKA.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>All-letter sum → E</th>
+<th>Vowel sum → S</th>
+<th>Consonant sum → P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MAYU</td>
+<td>15 → 6</td>
+<td>4 → 4</td>
+<td>11 → 11</td>
+</tr>
+<tr>
+<td>AYUMI</td>
+<td>24 → 6</td>
+<td>13 → 4</td>
+<td>11 → 11</td>
+</tr>
+<tr>
+<td>NODOKA</td>
+<td>24 → 6</td>
+<td>13 → 4</td>
+<td>11 → 11</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>All three give 6 · 4 · 11.</strong></p>
+<p>Different lengths. Different sequences of letters. Yet all three results match.</p>
+<p>AYUMI has the same M, A, Y, and U as MAYU, plus I, whose value is 9. Both the total and vowel sums increase by 9, but in this example, adding the digits takes us back to the same results. And since we're adding, the order of the letters is lost too.</p>
+<p>This isn't limited to similar spellings. The only letter MAYU and NODOKA share is A. Their consonants, M and Y versus N, D, and K, are entirely different, but both consonant sums are 11.</p>
+<p>Some information has slipped away. A name determines its numbers; the numbers don't necessarily determine a single name.</p>
+<p>Add “the initial is M,” and AYUMI and NODOKA disappear. With A, MAYU and NODOKA disappear. For these three names, one letter tells them apart.</p>
+<p>What happens when we're dealing with tens of thousands of names? How many candidates will the numbers and an initial leave us with?</p>
+<h2 id="japanese-names-how-far-can-we-narrow-down-more-than-30000-readings">5. Japanese names: how far can we narrow down more than 30,000 readings?</h2>
+<p>For the original Japanese candidate list, I selected given-name entries from the proper-name dictionary <a href="https://www.edrdg.org/enamdict/enamdict_doc.html">JMnedict</a>.</p>
+<p>After excluding surnames and full-name entries, processing the written readings under a fixed set of rules, and retaining those the program could calculate, the study contained <strong>33,837 distinct readings</strong>.</p>
+<p>A type here means one reading: the pronunciation represented in kana. Different kanji spellings of the same reading do not create additional candidates.</p>
+<p>These sources do not provide a consistent set of counts for how many people throughout Japan have each reading. So I gave all 33,837 readings equal probability, and for each name asked: how many candidates share its clues?</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Information available</th>
+<th style="text-align: right;">Mean candidate count</th>
+<th style="text-align: right;">Median candidate count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nothing</td>
+<td style="text-align: right;">33,837</td>
+<td style="text-align: right;">33,837</td>
+</tr>
+<tr>
+<td>Three numbers only</td>
+<td style="text-align: right;">303.2</td>
+<td style="text-align: right;">303</td>
+</tr>
+<tr>
+<td>Initial only</td>
+<td style="text-align: right;">2,737.9</td>
+<td style="text-align: right;">2,333</td>
+</tr>
+<tr>
+<td>Three numbers + initial</td>
+<td style="text-align: right;">26.6</td>
+<td style="text-align: right;">22</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>Using the rule that preserves 11, 22, and 33. These results use the full original dictionary, before selecting candidates for priority display. Names without vowels or without consonants are included.</em></p>
+<p>The three numbers alone reduce the average from more than 30,000 candidates to about 303. Add one initial, and it falls to about 27.</p>
+<p>That's a list I'd like to see.</p>
+<p>The numbers and initial identify a unique candidate for only about 1.4% of the readings. Most still have company.</p>
+<p>In this average, a very common name and a name you rarely encounter each get one vote. The weighting differs from choosing a person on the street, so the Japanese version does not display a population-based probability of a candidate being correct.</p>
+<p>The experiment with sex as an additional clue was limited to the U.S. data, where counts by recorded sex were available. For the Japanese candidate dictionary, I have not mapped and validated sex information for each reading, and do not have a corresponding set of counts by sex.</p>
+<h2 id="japanese-names-the-list-works-but-some-names-look-unfamiliar">6. Japanese names: the list works, but some names look unfamiliar</h2>
+<p>Looking through the actual candidates revealed another problem. Being in a dictionary is not the same as being a name you encounter every day.</p>
+<p>There were unfamiliar readings, old-fashioned readings, and readings that looked like names from other languages. Being unusual doesn't make a name wrong. Still, for a list presented as “Is your name in here?”, I wanted something easier to take in.</p>
+<p>So I kept the original dictionary and selected <strong>which candidates to show first</strong>.</p>
+<p>Readings that also appeared in a separate public name list received priority. This produced a priority set of 8,244 readings.</p>
+<p>It is not a list of the “top so-many percent of Japanese names.” It is a display selection based on appearances in the reference sources. Nor are the priority candidates ordered by their share of the population.</p>
+<p>For 6 · 4 · 11, the combination shared by MAYU and AYUMI, the results were:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Clues</th>
+<th style="text-align: right;">Matches in the original dictionary</th>
+<th style="text-align: right;">Priority candidates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6 · 4 · 11</td>
+<td style="text-align: right;">192</td>
+<td style="text-align: right;">53</td>
+</tr>
+<tr>
+<td>6 · 4 · 11 + M</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr>
+<td>6 · 4 · 11 + A</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">3</td>
+</tr>
+</tbody>
+</table></div>
+<p>With M, the priority candidates are:</p>
+<p><strong>Masatada, Matsumi, Mayu, Muga, and Monako.</strong></p>
+<p>With A:</p>
+<p><strong>Ayataka, Akuri, and Ayumi.</strong></p>
+<p>MAYU and AYUMI have indeed parted company. Neither list, though, gives us just one name. And because selection is based on appearances in reference sources, it doesn't leave only familiar names.</p>
+<p>Here's another example. For 9 · 7 · 11 with the initial A, the original dictionary contains 20 candidates. Five receive priority:</p>
+<p><strong>Ayumu, Atori, Ayame, Ariko, and Arito.</strong></p>
+<p>With this article's romanization and fixed list, preserving 11, 22, and 33 and specifying an initial brought the first set of candidates shown to <strong>a maximum of 25</strong>.</p>
+<p>But in that final step from 26 candidates to five, the numbers had supplied no extra information. <strong>Part of the reduction came from deciding which names to show.</strong></p>
+<p>A smaller list does not guarantee that the right name is still in it. That's why the tool also lets you look at the other candidates or the full candidate list.</p>
+<h2 id="japanese-names-i-cant-find-my-own-name">7. Japanese names: I can't find my own name</h2>
+<p>Now that plausible lists were appearing, I tried a few more searches.</p>
+<p>My own name was nowhere among the candidates I was looking at.</p>
+<p>A little awkward when you're the one making the tool.</p>
+<p>I searched the original list in Excel. My reading was there. It was one of the 33,837 candidates.</p>
+<p>What I found was that <strong>the Roman-letter spelling I normally entered differed from the spelling the dictionary used for its calculation</strong>. In my case, the two spellings also produced different numbers.</p>
+<p>To illustrate the mechanism, let's use こうた as an example. The dictionary calculates it as KOUTA. Under the rule that preserves 11, 22, and 33, comparing it with KOTA gives:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Spelling</th>
+<th>All-letter sum → E</th>
+<th>Vowel sum → S</th>
+<th>Consonant sum → P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KOUTA</td>
+<td>14 → 5</td>
+<td>10 → 1</td>
+<td>4 → 4</td>
+</tr>
+<tr>
+<td>KOTA</td>
+<td>11 → 11</td>
+<td>7 → 7</td>
+<td>4 → 4</td>
+</tr>
+</tbody>
+</table></div>
+<p>One U changes 5 · 1 · 4 into 11 · 7 · 4.</p>
+<p>A search for 11 · 7 · 4, calculated from KOTA, will not match the reading stored as KOUTA. The name is in the dictionary, but we're opening the wrong box.</p>
+<p>KOTA is a perfectly ordinary spelling to use. Japan's <a href="https://www.ezairyu.mofa.go.jp/passport/hebon.html">Ministry of Foreign Affairs guidance for passport romanization</a> explicitly gives コウタ → KOTA as an example. Different purposes call for different romanization conventions.</p>
+<p>Numerology calculators also offer examples of both approaches: <a href="https://tsuduri-illust.com/numerotekeisan">some omit the extra vowel letters in long vowels</a>, while <a href="https://esprit-delasse.com/numerology/">others retain them following the kana spelling</a>.</p>
+<p>I added a feature that compares the existing spelling with a passport-style version generated from the hiragana reading. This is an approximation based on basic passport rules, not a determination of the spelling on someone's actual passport. The reverse search can also include passport-style spellings, allowing it to find candidates under either convention.</p>
+<p>When I checked the conditions and searched again, I found my own name too.</p>
+<p>It had been in the dictionary. But having the same reading on the list did not necessarily lead me to the same box. The spelling used for the calculation needed checking as well.</p>
+<span class="anchor" id="number-constraints"></span>
+<h2 id="why-do-so-many-combinations-return-no-results">8. Why do so many combinations return no results?</h2>
+<p>Let's return to the calculation itself, which is shared by both the U.S. and Japanese searches.</p>
+<p>Once the tool exists, it's tempting to try arbitrary numbers.</p>
+<p>“What about this combination?”</p>
+<p>No results.</p>
+<p>“And this one?”</p>
+<p>Still no results.</p>
+<p>It turned out that gaps in the name list were not the whole explanation.</p>
+<p><strong>The three numbers were never free to vary independently.</strong></p>
+<p>Go back to the original addition. Let V be the vowel sum, K the consonant sum, and T the total. Then:</p>
+<div class="math">
+\[
+T=V+K
+\]</div>
+<p>We've only split the letters into vowels and consonants, so this is obvious once you look at it.</p>
+<p>The relationship leaves a trace even after we add the digits.</p>
+<p>First, consider the rule that always reduces to one digit, without treating 11, 22, or 33 as special. If d reduces a positive integer n to one digit, then:</p>
+<div class="math">
+\[
+d(n)=1+((n-1)\bmod 9)
+\]</div>
+<p>Here, “mod” means the remainder after division.</p>
+<p>Why 9? For example, the difference between 10a + b and its digit sum a + b is 9a. Adding digits removes a multiple of 9, so the remainder on division by 9 stays the same.</p>
+<p>For names containing both vowels and consonants, this gives:</p>
+<div class="math">
+\[
+E=d(S+P)
+\]</div>
+<p>Once S and P are fixed, E is fixed too.</p>
+<p>If all three range from 1 to 9, there seem to be 9³ = 729 combinations. But only <strong>9² = 81</strong> satisfy this relationship, one for each choice of S and P.</p>
+<p>Having three numbers did not mean having three independent clues.</p>
+<h2 id="keeping-11-22-and-33-doesnt-remove-the-constraint">9. Keeping 11, 22, and 33 doesn't remove the constraint</h2>
+<p>What happens under the rule used in the main examples, where we stop at 11, 22, or 33?</p>
+<p>S and P no longer necessarily determine a single E. But adding digits still preserves the remainder on division by 9.</p>
+<p>So, when a name has both vowels and consonants, we must at least have:</p>
+<div class="math">
+\[
+E\equiv S+P\pmod 9
+\]</div>
+<p>In words: E and S + P must have the same remainder when divided by 9.</p>
+<p>Take S = 4 and P = 11. Their sum is 15, whose remainder on division by 9 is 6.</p>
+<p>Among the possible values of E, namely 1–9, 11, 22, and 33, only <strong>6 and 33</strong> have that remainder.</p>
+<p>Saying “it can only be 6” would be a mistake.</p>
+<p>Suppose the unreduced vowel sum is 4 and the consonant sum is 29. Then:</p>
+<div class="math">
+\[
+S=4,\qquad P:29\longrightarrow11,\qquad E:4+29=33
+\]</div>
+<p>In the Japanese dictionary used here, however, 6 · 4 · 11 had 192 candidates, while 33 · 4 · 11 had none.</p>
+<p><strong>A result being arithmetically possible and a name with that result appearing in the dictionary are different matters.</strong></p>
+<p>The combination 33 · 4 · 11 was absent from this dictionary. That alone doesn't establish that it is impossible for Japanese names in general.</p>
+<p>For combinations in which all three components are numeric, the counts are:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>What we count</th>
+<th style="text-align: right;">Combinations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Freely choosing each of three numbers from 12 values</td>
+<td style="text-align: right;">1,728</td>
+</tr>
+<tr>
+<td>Fail the remainder condition</td>
+<td style="text-align: right;">1,536</td>
+</tr>
+<tr>
+<td>Pass the remainder condition</td>
+<td style="text-align: right;">192</td>
+</tr>
+<tr>
+<td>Actually have candidates in this Japanese dictionary</td>
+<td style="text-align: right;">177</td>
+</tr>
+</tbody>
+</table></div>
+<p>The 192 combinations pass the remainder test. That is not a proof that every one of them can be realized.</p>
+<p>Still, if we try the 1,728 inputs uniformly, only about 10.2% return a candidate. No wonder there were so many empty searches. This percentage concerns input combinations, not the share of people covered by the name list.</p>
+<p>Adding the 10 combinations with candidates but no vowel or no consonant component gives 187 occupied combinations in the Japanese dictionary. The candidate counts, including these cases, are listed in <a href="appendix-2/">Appendix 2 on a separate page</a>.</p>
+<p>What if we started with combinations that already have candidates?</p>
+<h2 id="start-with-a-name.play-with-the-numbers">10. Start with a name. Play with the numbers.</h2>
+<div class="tool-cta">
+    <p class="tool-cta-label">TRY THE TOOLS</p>
+    <p>Calculate three numbers from a name, or work backwards from the numbers to name candidates.</p>
+    <div class="tool-cta-links">
+        <a href="/software/name-numerology/#forward-tool">Name → Three numbers</a>
+        <a href="/software/name-numerology/#inverse-tool">Three numbers → Name candidates</a>
+    </div>
+</div>
+<p>The tool has a <strong>name-to-number calculator</strong> and a <strong>number-to-name lookup</strong>. Their inputs are independent: it doesn't take the name you gave the calculator and quietly reuse it as the answer to the reverse search.</p>
+<p>Try the two examples from this article first. Choose the rule that preserves 11, 22, and 33, and leave Japanese romanization at its default setting.</p>
+<p>For U.S. names, enter <strong>9 · 22 · 5</strong>, leaving initial and sex unspecified, and look at the proportions based on listed counts. Theodore at about 98%, followed by the other 12 candidates: the list shows what it means to use frequency as a clue. Selecting a recorded sex changes the candidates and proportions too.</p>
+<p>Next, try Japanese names. Use the calculator to confirm that Mayu (まゆ) and Ayumi (あゆみ) produce the same numbers, then enter <strong>6 · 4 · 11</strong> in the reverse lookup. Add the initial M, then change it to A.</p>
+<p>The numbers haven't moved, but the names have changed. One letter separates two names that had been sitting in the same box.</p>
+<p>To open a box without knowing what is inside, use the <strong>combination browser</strong>. It lists combinations with candidates under your current conditions, so you can explore without repeatedly getting no results. You can start by specifying just one of E, S, or P.</p>
+<p>If a Japanese name you're looking for isn't visible, try the other candidates or the full list. It may be waiting beyond the names shown first.</p>
+<h2 id="how-much-of-a-name-was-left-in-the-numbers">11. How much of a name was left in the numbers?</h2>
+<p>Turn a name into a sum, and letter order disappears. Different letters and different name lengths can collapse into the same results. The three numbers are related to one another, and they don't always lead back to one name.</p>
+<p>Yet they hadn't lost everything.</p>
+<p>For the U.S. data, combining the numbers, initial, and listed counts placed the correct name in the top 10 for about 96% of the people listed in that same dataset. Knowing recorded sex raised that to about 98%. In the original Japanese dictionary, the numbers alone left an average of about 303 candidates; an initial brought that down to about 27.</p>
+<p>The neat lists on screen also depended on the dictionary and display choices. Making those lists easier to read left some names outside the first view. For Japanese names, even the Roman-letter spelling used before calculating the numbers needed to be consistent.</p>
+<p>At first, I wanted to guess a name from its numbers.</p>
+<p>But as I opened the boxes, I became curious about the names gathering inside them.</p>
+<p>The numbers collect the candidates. The first letter separates them further. If we know how many people have each name, the order of our guesses changes. Every name on the screen has a reason for still being there.</p>
+<p>“Is your name …?”</p>
+<p>I set out to find one name and ended up discovering many. Behind the same three numbers were all these different names.</p>
+<hr />
+<h2 id="appendix-1-candidate-sets-proportions-and-information">Appendix 1: candidate sets, proportions, and information</h2>
+<p>This part is for readers who would like a closer look at the calculations.</p>
+<h3 id="collecting-candidates-and-calculating-their-shares">Collecting candidates and calculating their shares</h3>
+<p>Let D be the set of names, and let f be the function that calculates a name's three numbers. The candidates for a result z form the set:</p>
+<div class="math">
+\[
+C(z)=\{x\in D\mid f(x)=z\}
+\]</div>
+<p>In words, collect every name in D whose calculation gives z. This is the “box” used throughout the article.</p>
+<p>Choose a name X from the U.S. data with probability proportional to its listed count, and let Z be its calculation result. If n(x) is the listed count for name x, then its share given the numbers z is:</p>
+<div class="math">
+\[
+P(X=x\mid Z=z)
+=\frac{n(x)}{\sum_{y\in C(z)}n(y)}
+\qquad(x\in C(z))
+\]</div>
+<p>If we also know the initial, recalculate the denominator using only candidates that begin with that letter. If recorded sex is specified, use the counts for that category. These calculations apply when at least one candidate matches the conditions.</p>
+<h3 id="average-candidate-count-when-each-name-has-equal-weight">Average candidate count when each name has equal weight</h3>
+<p>The mean candidate counts in the article do not come from choosing number combinations uniformly. We choose the correct name uniformly from the distinct names, then count how many candidates share that name's clues.</p>
+<p>If the groups of names sharing a result have sizes n₁, n₂, …, and the total number of candidate names is N, then:</p>
+<div class="math">
+\[
+\text{Mean candidate count}=\frac{1}{N}\sum_g n_g^2
+\]</div>
+<p>A group of size n_g appears n_g times when we go through the possible correct names, which is why its size is squared.</p>
+<h3 id="measuring-the-uncertainty-that-remains">Measuring the uncertainty that remains</h3>
+<p>Alongside candidate counts, I calculated entropy, a measure of the uncertainty left in the answer.</p>
+<p>If the probability of name x is p(x), define:</p>
+<div class="math">
+\[
+H(X)=-\sum_x p(x)\log_2 p(x)
+\]</div>
+<p>With N equally likely candidates, H(X) = log₂N. Eight candidates give 3 bits; 16 give 4 bits.</p>
+<p>H(X | Z) is the uncertainty remaining after seeing the numbers. H(X | Z, I) is what remains after also learning the initial I.</p>
+<p>Using equal weights for the 33,837 Japanese readings, and weights proportional to the listed counts for the 29,225 U.S. spellings, gives:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Information available</th>
+<th style="text-align: right;">U.S.: weighted by listed counts</th>
+<th style="text-align: right;">Japanese: readings weighted equally</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None: H(X)</td>
+<td style="text-align: right;">11.64 bits</td>
+<td style="text-align: right;">15.05 bits</td>
+</tr>
+<tr>
+<td>Numbers: H(X | Z)</td>
+<td style="text-align: right;">4.96 bits</td>
+<td style="text-align: right;">8.03 bits</td>
+</tr>
+<tr>
+<td>Numbers and initial: H(X | Z, I)</td>
+<td style="text-align: right;">1.72 bits</td>
+<td style="text-align: right;">4.23 bits</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both columns use the rule that preserves 11, 22, and 33, with sex unspecified. Under the uniform Japanese evaluation, the numbers remove about 7.02 bits of uncertainty, and the initial removes a further 3.80 bits.</p>
+<p>The two columns use different units and weights: readings versus spellings, and uniform versus frequency-based selection. They cannot establish that names in one language are inherently easier to guess. A frequency-weighted mean candidate count for the U.S. data would also use each name's listed count as its weight, rather than the uniform-average formula above.</p>
+<p>Entropy alone doesn't determine how many guesses you need or the top-candidate success rate. Candidate counts, the distribution of probability, and how many guesses are allowed need to be examined separately.</p>
+<span class="anchor" id="appendix-2"></span>
+<h2 id="appendix-2-full-combination-tables">Appendix 2: full combination tables</h2>
+<p><a href="appendix-2/">See the number combinations, candidate counts, and listed counts</a></p>
+<p>The 216 combinations for the rule preserving 11, 22, and 33, and the 99 combinations for full single-digit reduction, are listed on a separate page. The tables show U.S. spelling counts and listed counts, plus Japanese full and priority candidate counts, including combinations with zero matches.</p>
+<span class="anchor" id="data-and-calculation"></span>
+<h2 id="data-and-calculation-notes">Data and calculation notes</h2>
+<p>The underlying name data was checked and fixed on 15 October 2026. The U.S. recorded-sex analysis was added on 20 October using male and female counts from the same source file. The Japanese priority selection was revised on 23 October; both the article and appendices use the public version with 8,244 priority readings.</p>
+<p>The Japanese figures use the original convention that preserves vowel letters for long sounds. Passport-style comparison and searches across both spellings, added on 20 October, are separate conditions available in the tool. Changing the dictionary, romanization, or selection method can change candidate counts and maxima.</p>
+<h3 id="looking-up-a-few-familiar-u.s.names">Looking up a few familiar U.S. names</h3>
+<p>Adam, Alex, Tom, John. How common are these names, familiar even to me, in this dataset?</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align: right;">Listed count, male and female combined</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Adam</td>
+<td style="text-align: right;">3,505</td>
+</tr>
+<tr>
+<td>Alex</td>
+<td style="text-align: right;">1,809</td>
+</tr>
+<tr>
+<td>Tom</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr>
+<td>John</td>
+<td style="text-align: right;">8,055</td>
+</tr>
+</tbody>
+</table></div>
+<p>Tom appears 46 times, but Thomas appears 6,581 times. Alex has 1,809 entries, while Alexander has 7,527. This list counts registered spellings separately, so Tom and Thomas, and Alex and Alexander, are distinct names in the data.</p>
+<p>Thinking of a name you often hear is not quite the same as finding a common spelling in one year's birth data. In particular, 46 entries for Tom cannot tell us how many people are called Tom.</p>
+<h3 id="display-and-counting-details">Display and counting details</h3>
+<ul>
+<li><strong>The maximum of 25:</strong> Section 6 uses the fixed Japanese dictionary, the original romanization only, the rule preserving 11, 22, and 33, and a specified initial. This is the size of the entire set selected for display before pagination, including cases where the tool falls back to the original dictionary because there are no priority candidates. Some conditions exceed 25 when the initial is unspecified, all numbers are reduced to one digit, or passport-style spellings are included.</li>
+<li><strong>Counts versus what is shown first:</strong> The combination browser shows the number of distinct matching names in the original dictionary. The Japanese name view shows priority candidates first, so fewer names may initially be visible than the combination count suggests. If there are no priority candidates, the original dictionary's candidates are shown instead.</li>
+<li><strong>Searching both spellings:</strong> Including passport-style spellings is off by default. Each reading counts as one candidate. Results display only the spellings that match the specified numbers and initial. If both conventions match, two spelling rows appear within that one candidate.</li>
+<li><strong>U.S. recorded sex and proportions:</strong> The default is unspecified, with male and female counts combined. Male and female refer to the SSA's recorded categories. When one is selected, the candidates are spellings listed in that category, and its counts determine the ranking. A spelling listed in both categories remains in both. For frequency weighting, the denominator is the sum of the selected-category counts across all matching candidates, not just the candidates on one screen page. Under equal weighting, every remaining candidate has the same weight. Appendices 1 and 2 report results with sex unspecified.</li>
+<li><strong>Names without vowels or without consonants:</strong> A missing component is shown as “—”, not replaced with 0 or 9. Including these cases gives 187 occupied combinations in the fixed Japanese dictionary under the rule preserving 11, 22, and 33.</li>
+</ul>
+<h3 id="coverage-of-the-name-lists">Coverage of the name lists</h3>
+<p>Priority candidates are readings that also appear in a separate name list. The selection therefore depends on what that source includes and how its entries were chosen.</p>
+<p>Names exist outside the lists. Neither the original dictionary nor the priority set covers every name. A name's absence from the screen does not establish that it doesn't exist.</p>
+<p><strong>Public-release update, 23 October 2026:</strong> During the research, appearances in rankings from Meiji Yasuda, Tamahiyo, and Baby Calendar also informed the selection. Because redistribution terms for that information in a public app had not been confirmed, it was removed from the public version's selection criteria. Priority candidates are now selected solely by matching against the MIT-licensed name lists below. The original dictionary of 33,837 readings and the calculation rules are unchanged.</p>
+<h3 id="sources-and-calculation-conventions">Sources and calculation conventions</h3>
+<ul>
+<li><strong>Original Japanese dictionary:</strong> <a href="https://www.edrdg.org/enamdict/enamdict_doc.html">JMnedict / ENAMDICT</a>. Given-name readings were extracted and full-name entries excluded. This is not a dataset of population counts. Copyright: James William Breen / EDRDG. The dictionary-derived data and romanization data are distributed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. See also the <a href="https://www.edrdg.org/edrdg/licence.html">EDRDG licensing information</a>.</li>
+<li><strong>Japanese priority display:</strong> The reading columns of the male and female given-name org and opti files in a <a href="https://github.com/shuheilocale/japanese-personal-name-dataset/tree/74d7bfd77ea0043d39a23f1188d0256182eb80b1">fixed version of the Japanese Personal Name Dataset</a>, under the MIT License, Copyright (c) 2022 shuheilocale. Readings from the male and female files are combined, deduplicated, and matched against the original dictionary. The 8,244 matching readings appearing in org or opti receive priority; the 936 also appearing in opti are shown first within that set. The source's romanization, kanji, and sex columns are not used for this priority selection. The opti files are selections made by that dataset's author, not a list hand-picked by this article's author, a popularity ranking, or an estimate of national frequencies. The MIT selection sources and the CC BY-SA 4.0 dictionary-derived data retain their separate licensing terms.</li>
+<li><strong>U.S. name data:</strong> A public copy derived from the SSA's 2024 national data. The official archive could not be downloaded directly, so a <a href="https://raw.githubusercontent.com/dxdc/babynames/ef1ad7133de7cf6ca496249d3ae4ede2770def8f/raw/yob2024.txt">pinned copy from dxdc/babynames</a> was checked byte for byte against a <a href="https://raw.githubusercontent.com/vancleve/BIO540-DWV/310a00ee5672b7f6bd823d2f35c697e3df8ca43d/yob2024.txt">pinned copy from vancleve/BIO540-DWV</a>. Retrieved on 15 October 2026; file: <code>yob2024.txt</code>, 407,010 bytes. SHA-256: <code>f0083af67c48b666e938d8bb7cb5ec766c832d08359fbdae0edf963dbd9613fb</code>. It has not been verified as identical to the current official distribution. See also the SSA's <a href="https://www.ssa.gov/oact/babynames/background.html">data background</a> and <a href="https://www.ssa.gov/oact/babynames/limits.html">publication limits</a>. Very rare names are omitted, and the source may retain input errors or unusual spellings.</li>
+<li><strong>Master numbers:</strong> The explanation draws on <a href="https://www.numerology.com/articles/about-numerology/master-numbers/">Numerology.com's guide</a>. It describes an interpretation within numerology, not an effect tested by this experiment.</li>
+<li><strong>Romanization and vowels:</strong> Japanese calculations use the program's specified reading and romanization rules. Different spellings, including different treatments of long vowels, can change the result. Vowels are AEIOU; Y is a consonant. A missing vowel or consonant component is “—”. Results obtained on another site need to use matching conventions for this lookup to work as intended.</li>
+<li><strong>Romanization references:</strong> Japan's <a href="https://www.ezairyu.mofa.go.jp/passport/hebon.html">Ministry of Foreign Affairs Hepburn romanization table</a> and the Agency for Cultural Affairs' <a href="https://www.bunka.go.jp/seisaku/kokugo_nihongo/kokugo_shisaku/pdf/94340701_01.pdf">Q&amp;A on the Romanization of Japanese</a>, February 2026, including questions 21, 22, and 25. Checked on 19 October 2026. These Japanese sources explain differences between conventions and their uses; they do not establish that the program fully conforms to every rule described.</li>
+<li><strong>Scope of passport-style conversion:</strong> This is an approximate conversion from kana based on basic passport rules. It differs in the treatment of long vowels, the moraic nasal, doubled consonants, and other details. It cannot fully determine pronunciation or word boundaries, and some readings are unsupported. Unsupported readings remain in the original dictionary and can still be searched using the original spelling.</li>
+<li><strong>Romanization examples in numerology:</strong> <a href="https://tsuduri-illust.com/numerotekeisan">Manga Suhi Labo's calculation guide</a> uses さとう → SATO, while the <a href="https://esprit-delasse.com/numerology/">Esprit Delasse calculator instructions</a> use さとう → SATOU. Checked on 20 October 2026. These establish examples of both conventions, not their relative prevalence.</li>
+<li><strong>Follow-up on my own name:</strong> On 19 October 2026, I confirmed that my reading was in the fixed dictionary and that my usual Roman-letter spelling produced different numbers. On 20 October, I searched again and found my name. This was not a complete reconstruction of the original screen conditions. The name こうた in Section 7 is an explanatory example, not a disclosure of my name.</li>
+<li><strong>Scope of the evaluation:</strong> These are calculations within known dictionaries and frequency distributions, not measured prediction performance on unknown people, other generations, or unlisted names. Japanese readings and U.S. spellings are different units, gathered in different ways; the results do not rank languages by how easy their names are to guess.</li>
+</ul>
+<p>What this experiment examines is how much information about a name survives the calculation that turns it into numbers. It does not test the validity of numerology's personality readings or predictions.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <span>© baseka</span>
+            <div class="footer-links">
+                <a href="https://x.com/BaseBaseka" target="_blank" rel="noopener noreferrer">X</a>
+                <a href="https://soundcloud.com/user-900569136" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
